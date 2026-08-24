@@ -16,9 +16,12 @@ clean form. Internal links keep `.html` so the folder still previews by double-c
 across index, maintenance and contact. Create a Formspree form, then set the `action`
 and `method` on each and delete the fake handler at the bottom of `main.js`.
 
-### 2. Photos
-13 image placeholders, all `<div class="ph">`. See `images/PHOTOS-NEEDED.md` for the
-list and suggested filenames. Dáire has sent nothing usable yet beyond certificates.
+### 2. Photos — mostly done
+11 of Dáire's photos are in and sized. One placeholder remains: the manifold shot for
+hydraulic balancing on the Services page. See `images/PHOTOS-NEEDED.md`.
+
+Still worth chasing: **a photo of Dáire himself**, and the van. The About section says
+"One name on the van" and currently sits beside a cleaned strainer in his hand.
 
 ### 3. Certificates
 6 slots on `certifications.html`. Four are in hand (QQI, Grant R290, manual handling,
@@ -32,17 +35,9 @@ the **insurance certificate**.
 It works and it is on-brand, but replace it when the real logo arrives. One file, both
 the `icon` and `apple-touch-icon` link tags point at it.
 
-### 5. og:image
-Meta tags are in place but `og:image` is deliberately **not set**, because there is no
-photo to point at and a broken image URL is worse than none. Link previews on WhatsApp
-and Facebook will be plain until this is added. Once the hero shot lands, drop a
-1200x630 crop at `images/og-image.jpg` and add to the `page()` head block in `build.py`:
-
-```html
-<meta property="og:image" content="https://irishairtowater.com/images/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-```
+### 5. og:image — done
+`images/og-image.jpg` is a 1200x630 crop of the hero photo, wired into every page.
+Swap it if a better shot arrives.
 
 ---
 
@@ -55,7 +50,11 @@ and Facebook will be plain until this is added. Once the hero shot lands, drop a
    checkable thing on it.
 3. **Facebook URL.** Instagram is `@irish_airtowater`. The Facebook link currently points
    at Instagram as a placeholder.
-4. **Does he install Grant?** Not in the brands row for now, see the copy policy below.
+4. **Grant — his own photos answer this.** Three of the photos he just sent show Grant
+   Aerona outdoor units he has worked on, and he holds the Grant R290 certificate. His
+   website still lists only five brands and does not include Grant, so it is left out of
+   the brands row for now. Worth one line to him: "do you want Grant added to the brands
+   list?" It is a one-word change.
 5. **Street address** for the LocalBusiness schema. Sligo only at present, which is fine
    if he works from home, but a full address helps local SEO.
 6. **Two videos** (1156.mp4, 1167.mp4) were supplied and are unused. Hero loop, or drop them.

@@ -13,7 +13,7 @@ process that a document does not support.
 """
 
 from build import (
-    page, faq_block, faq_schema, CTA_BAND, SITE,
+    page, faq_block, faq_schema, CTA_BAND, SITE, img,
     PHONE_DISPLAY, PHONE_TEL, PHONE_WA, EMAIL,
     ICON_PHONE, ICON_MAIL, ICON_INSTA, ICON_PIN, TICK, PLUS,
 )
@@ -132,7 +132,7 @@ HOME = f"""
       </div>
     </div>
     <div class="hero-media">
-      <div class="ph"><span>IMAGE PLACEHOLDER<br>Hero shot: D&aacute;ire on an install or a finished outdoor unit<br>(approx 1200 x 1000)</span></div>
+      {img("hero-outdoor-unit.jpg", "Panasonic air-to-water heat pump outdoor unit installed beside a house", 900, 1200, eager=True)}
       <div class="hero-badge">
         <div class="dot-cert">F&#8209;GAS</div>
         <div>
@@ -161,7 +161,7 @@ HOME = f"""
     </div>
     <div class="svc-grid">
       <a class="svc svc-feature reveal" href="services.html#installation">
-        <div class="ph"><span>IMAGE PLACEHOLDER<br>Install in progress or plant room shot</span></div>
+        {img("installation-outdoor-unit.jpg", "Twin-fan air-to-water heat pump outdoor unit mounted against a wall", 750, 1000)}
         <div class="svc-feature-body">
           <h3>Installation</h3>
           <p>Air-to-water heat pump installation for domestic and commercial systems, through to commissioning and handover.</p>
@@ -218,7 +218,7 @@ HOME = f"""
 <section id="about" class="about bg-white">
   <div class="wrap about-grid">
     <div class="about-media reveal">
-      <div class="ph"><span>IMAGE PLACEHOLDER<br>Portrait of D&aacute;ire, or D&aacute;ire at work / with the van<br>(approx 900 x 1050)</span></div>
+      {img("strainer-cleaned.jpg", "A cleaned heat pump system strainer held up after servicing", 750, 1000)}
     </div>
     <div class="reveal">
       <span class="eyebrow eyebrow-dark">About</span>
@@ -235,7 +235,7 @@ HOME = f"""
   <div class="wrap coverage-grid">
     {COVERAGE_BLOCK}
     <div class="coverage-media reveal">
-      <div class="ph"><span>IMAGE PLACEHOLDER<br>Map of Ireland graphic or van on the road<br>(approx 1000 x 750)</span></div>
+      {img("coverage-home-install.jpg", "Air-to-water heat pump outdoor unit at a domestic property", 750, 1000)}
     </div>
   </div>
 </section>
@@ -268,7 +268,7 @@ SERVICES = f"""
   <div class="wrap">
 
     <div class="svc-detail reveal" id="installation">
-      <div class="svc-detail-media"><div class="ph"><span>IMAGE PLACEHOLDER<br>Outdoor unit install / pipework<br>(approx 1000 x 750)</span></div></div>
+      <div class="svc-detail-media">{img("services-installation.jpg", "Wall-mounted heat pump unit with pipework run down the wall", 562, 1000)}</div>
       <div>
         <span class="eyebrow eyebrow-dark">Installation</span>
         <h2>Installation</h2>
@@ -286,7 +286,7 @@ SERVICES = f"""
     </div>
 
     <div class="svc-detail flip reveal" id="commissioning">
-      <div class="svc-detail-media"><div class="ph"><span>IMAGE PLACEHOLDER<br>Controls / gauges / commissioning shot<br>(approx 1000 x 750)</span></div></div>
+      <div class="svc-detail-media">{img("services-commissioning-controls.jpg", "Heat pump control board and wiring inside an opened control panel", 750, 1000)}</div>
       <div>
         <span class="eyebrow eyebrow-dark">Commissioning</span>
         <h2>Commissioning</h2>
@@ -302,7 +302,7 @@ SERVICES = f"""
     </div>
 
     <div class="svc-detail reveal" id="repairs">
-      <div class="svc-detail-media"><div class="ph"><span>IMAGE PLACEHOLDER<br>Diagnostics / controller screen with alarm<br>(approx 1000 x 750)</span></div></div>
+      <div class="svc-detail-media">{img("services-repairs-worn-fans.jpg", "Heat pump outdoor unit with weathered fan blades and casing", 750, 1000)}</div>
       <div>
         <span class="eyebrow eyebrow-dark">Service &amp; Repairs</span>
         <h2>Service &amp; repairs</h2>
@@ -320,7 +320,7 @@ SERVICES = f"""
     </div>
 
     <div class="svc-detail flip reveal" id="aftersales">
-      <div class="svc-detail-media"><div class="ph"><span>IMAGE PLACEHOLDER<br>Service visit / filter or unit inspection<br>(approx 1000 x 750)</span></div></div>
+      <div class="svc-detail-media">{img("services-maintenance-filters.jpg", "Heat pump air filters removed from the unit for cleaning", 750, 1000)}</div>
       <div>
         <span class="eyebrow eyebrow-dark">Aftersales Maintenance</span>
         <h2>Aftersales maintenance</h2>
@@ -468,7 +468,7 @@ MAINTENANCE = f"""
         <ul class="tick-list" style="margin-top:22px">{NEED_LI}</ul>
       </div>
       <div class="about-media reveal">
-        <div class="ph ph-dark"><span>IMAGE PLACEHOLDER<br>Outdoor unit with clear access, or engineer at the unit<br>(approx 900 x 1050)</span></div>
+        {img("maintenance-clear-access.jpg", "Heat pump outdoor unit with clear access around it", 750, 1000)}
       </div>
     </div>
   </div>
@@ -589,7 +589,7 @@ CERTIFICATIONS = f"""
   <div class="wrap">
     <div class="about-grid">
       <div class="about-media reveal">
-        <div class="ph ph-dark"><span>IMAGE PLACEHOLDER<br>D&aacute;ire at work, or van and equipment<br>(approx 900 x 1050)</span></div>
+        {img("certifications-at-work.jpg", "A heat pump system strainer being inspected during a service visit", 750, 1000)}
       </div>
       <div class="reveal">
         <span class="eyebrow">Control measures</span>
@@ -638,7 +638,7 @@ CONTACT = f"""
   <div class="wrap coverage-grid">
     {COVERAGE_BLOCK}
     <div class="coverage-media reveal">
-      <div class="ph"><span>IMAGE PLACEHOLDER<br>Map of Ireland graphic or van on the road<br>(approx 1000 x 750)</span></div>
+      {img("contact-coverage-grant-unit.jpg", "Grant air-to-water heat pump outdoor unit at a domestic property", 750, 1000)}
     </div>
   </div>
 </section>

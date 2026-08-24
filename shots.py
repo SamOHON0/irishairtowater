@@ -26,6 +26,16 @@ async def main():
                 await pg.wait_for_timeout(140)
                 y += 700
             await pg.evaluate("window.scrollTo(0,0)")
+            # force lazy images to load and reveals to settle so the
+            # stitched full-page capture is truthful
+            await pg.evaluate("document.querySelectorAll('img[loading=lazy]').forEach(i=>i.loading='eager')")
+            try:
+                await pg.wait_for_function(
+                    "Array.from(document.images).every(i=>i.complete)", timeout=8000)
+            except Exception:
+                pass
+            await pg.evaluate(
+                "Promise.all(Array.from(document.images).map(i=>i.decode().catch(()=>{})))")
             # force final state so the stitched full-page capture is truthful
             await pg.evaluate("document.querySelectorAll('.reveal').forEach(e=>{e.classList.add('in');e.style.transition='none';e.style.opacity='1';e.style.transform='none'})")
             await pg.wait_for_timeout(400)

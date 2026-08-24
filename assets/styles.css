@@ -71,6 +71,22 @@ a { color: inherit; }
   padding: 16px;
 }
 .ph span { max-width: 26ch; }
+
+/* ---------- Photos ----------
+   Every supplied photo is 3:4 portrait, so slots are portrait-friendly and
+   images cover rather than letterbox. */
+.media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+}
+.media-frame {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--bone-dim);
+}
 .ph-dark {
   background:
     repeating-linear-gradient(45deg, rgba(244,243,238,0.06) 0 12px, transparent 12px 24px),
@@ -267,7 +283,7 @@ header {
 }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 .hero-media { position: relative; }
-.hero-media .ph { aspect-ratio: 4 / 3.4; }
+.hero-media .ph, .hero-media .media-frame { aspect-ratio: 4 / 4.2; }
 .hero-badge {
   position: absolute;
   left: -18px;
@@ -431,6 +447,12 @@ section { padding: 92px 0; }
   flex: 1;
   min-height: 180px;
 }
+.svc-feature .media-frame {
+  border-radius: 0;
+  flex: 1;
+  min-height: 200px;
+}
+.svc-feature .media-frame .media-img { border-radius: 0; }
 .svc-feature .svc-feature-body { padding: 26px 28px 30px; }
 .svc-feature h3 { color: var(--white); }
 .svc-feature p { color: rgba(244, 243, 238, 0.75); }
@@ -459,7 +481,7 @@ section { padding: 92px 0; }
 }
 .svc-detail:first-of-type { border-top: none; padding-top: 12px; }
 .svc-detail.flip .svc-detail-media { order: 2; }
-.svc-detail-media .ph { aspect-ratio: 4 / 3; }
+.svc-detail-media .ph, .svc-detail-media .media-frame { aspect-ratio: 4 / 4.1; }
 .svc-detail h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-bottom: 14px; letter-spacing: -0.015em; }
 .svc-detail > div > p { color: var(--text-soft); margin-bottom: 18px; max-width: 56ch; }
 .tick-list { list-style: none; display: grid; gap: 11px; margin-bottom: 22px; }
@@ -510,7 +532,7 @@ section { padding: 92px 0; }
 /* ---------- About ---------- */
 .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: center; }
 .about-media { position: relative; }
-.about-media .ph { aspect-ratio: 4 / 4.6; }
+.about-media .ph, .about-media .media-frame { aspect-ratio: 4 / 4.6; }
 .about h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: 18px; letter-spacing: -0.015em; }
 .about p { color: var(--text-soft); margin-bottom: 16px; max-width: 56ch; }
 .about .sig { margin-top: 26px; font-family: 'Sora', sans-serif; font-weight: 600; color: var(--ink); }
@@ -563,7 +585,7 @@ section { padding: 92px 0; }
 
 /* ---------- Coverage ---------- */
 .coverage-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
-.coverage-media .ph { aspect-ratio: 4 / 3; }
+.coverage-media .ph, .coverage-media .media-frame { aspect-ratio: 4 / 3.6; }
 .coverage h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: 16px; letter-spacing: -0.015em; }
 .coverage p { color: var(--text-soft); max-width: 52ch; margin-bottom: 22px; }
 .county-list {
