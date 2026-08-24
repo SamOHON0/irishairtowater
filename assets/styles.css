@@ -86,7 +86,10 @@ a { color: inherit; }
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--bone-dim);
+  border: 1px solid var(--line);
 }
+.bg-pine .media-frame, .hero .media-frame { border-color: rgba(244, 243, 238, 0.14); }
+.svc-feature .media-frame { border: none; border-bottom: 1px solid rgba(244, 243, 238, 0.14); }
 .ph-dark {
   background:
     repeating-linear-gradient(45deg, rgba(244,243,238,0.06) 0 12px, transparent 12px 24px),

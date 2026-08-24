@@ -10,14 +10,14 @@ except the hero.
 |---|---|
 | hero-outdoor-unit.jpg | Home hero (eager, high priority) |
 | installation-outdoor-unit.jpg | Home, Installation feature card |
-| strainer-cleaned.jpg | Home, About section |
+| about-installed-unit.jpg | Home, About (Grant Aerona install) |
 | coverage-home-install.jpg | Home, Coverage |
 | services-installation.jpg | Services, Installation |
-| services-commissioning-controls.jpg | Services, Commissioning |
-| services-repairs-worn-fans.jpg | Services, Service & repairs |
-| services-maintenance-filters.jpg | Services, Aftersales maintenance |
+| services-commissioning-controls.jpg | Services, Commissioning (control board) |
+| services-repairs-strainer-check.jpg | Services, Service & repairs (strainer check) |
+| services-aftersales-filters.jpg | Services, Aftersales (filters out for cleaning) |
 | maintenance-clear-access.jpg | Maintenance, "What we need from you" |
-| certifications-at-work.jpg | Certifications, "How we work on site" |
+| certifications-at-work.jpg | Certifications, commercial plant-room work |
 | contact-coverage-grant-unit.jpg | Contact, Coverage |
 | og-image.jpg | Social share card, 1200x630 crop of the hero |
 
@@ -32,14 +32,22 @@ except the hero.
    is the only remaining `<div class="ph">` placeholder on the site.
 4. **A logo**, for the header and to replace `favicon.svg`.
 
-## Not used yet
+## Image rules used on this site
 
-8 photos from the batch are unused and still sit in the repo root as `WhatsApp Image*`
+Clean, finished installs carry the brand slots (hero, About, coverage). Work-in-progress
+and diagnostic shots appear only beside copy about service work. Photos showing neglect
+(algae-covered fans, dirty filters against a wall, the dirty strainer) are OFF the site:
+out of context they read as poor workmanship, not expertise. They would only return
+inside an explicitly labelled before/after block.
+
+## Not used
+
+Photos from the batch left unused and still sit in the repo root as `WhatsApp Image*`
 files. They are gitignored, so they are not in the repo, but they are on disk:
 
 - Two more sets of dirty filters (one on a driveway, one on gravel)
-- The *dirty* strainer that pairs with `strainer-cleaned.jpg`. These two together are a
-  strong before/after and would suit the maintenance page if you want to add that block.
+- The dirty strainer and the algae-covered fan unit. Paired with after shots these would
+  make a strong labelled before/after block on the maintenance page.
 - Two more Grant Aerona outdoor units
 - A weathered twin-fan unit with algae on the casing
 - A unit with a fitted cover, and one wrapped/frosted

@@ -123,7 +123,7 @@ HOME = f"""
 <section class="hero" style="padding:0;">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Air-to-Water Heat Pump Specialist &mdash; Ireland-wide</span>
+      <span class="eyebrow">Air-to-Water Heat Pump Specialist, Ireland-wide</span>
       <h1>Heat pumps installed, commissioned and looked after <em>properly</em>.</h1>
       <p class="lede">Installation, commissioning, service and aftersales maintenance for air-to-water heat pumps. F-GAS registered, Sligo-based, covering all of Ireland.</p>
       <div class="hero-ctas">
@@ -218,7 +218,7 @@ HOME = f"""
 <section id="about" class="about bg-white">
   <div class="wrap about-grid">
     <div class="about-media reveal">
-      {img("strainer-cleaned.jpg", "A cleaned heat pump system strainer held up after servicing", 750, 1000)}
+      {img("about-installed-unit.jpg", "A Grant Aerona air-to-water heat pump installed at a home", 750, 1000)}
     </div>
     <div class="reveal">
       <span class="eyebrow eyebrow-dark">About</span>
@@ -235,7 +235,7 @@ HOME = f"""
   <div class="wrap coverage-grid">
     {COVERAGE_BLOCK}
     <div class="coverage-media reveal">
-      {img("coverage-home-install.jpg", "Air-to-water heat pump outdoor unit at a domestic property", 750, 1000)}
+      {img("coverage-home-install.jpg", "A finished air-to-water heat pump installation at an Irish home", 750, 1000)}
     </div>
   </div>
 </section>
@@ -302,7 +302,7 @@ SERVICES = f"""
     </div>
 
     <div class="svc-detail reveal" id="repairs">
-      <div class="svc-detail-media">{img("services-repairs-worn-fans.jpg", "Heat pump outdoor unit with weathered fan blades and casing", 750, 1000)}</div>
+      <div class="svc-detail-media">{img("services-repairs-strainer-check.jpg", "A system strainer checked in hand during a service call", 937, 1000)}</div>
       <div>
         <span class="eyebrow eyebrow-dark">Service &amp; Repairs</span>
         <h2>Service &amp; repairs</h2>
@@ -320,7 +320,7 @@ SERVICES = f"""
     </div>
 
     <div class="svc-detail flip reveal" id="aftersales">
-      <div class="svc-detail-media">{img("services-maintenance-filters.jpg", "Heat pump air filters removed from the unit for cleaning", 750, 1000)}</div>
+      <div class="svc-detail-media">{img("services-aftersales-filters.jpg", "Air filters removed and laid out for cleaning during a service visit", 750, 1000)}</div>
       <div>
         <span class="eyebrow eyebrow-dark">Aftersales Maintenance</span>
         <h2>Aftersales maintenance</h2>
@@ -468,7 +468,7 @@ MAINTENANCE = f"""
         <ul class="tick-list" style="margin-top:22px">{NEED_LI}</ul>
       </div>
       <div class="about-media reveal">
-        {img("maintenance-clear-access.jpg", "Heat pump outdoor unit with clear access around it", 750, 1000)}
+        {img("maintenance-clear-access.jpg", "Outdoor heat pump unit with clear space around it", 750, 1000)}
       </div>
     </div>
   </div>
@@ -529,7 +529,7 @@ CERTS = [
     },
     {
         "title": "QQI Level 6 Advanced Certificate",
-        "desc": "Craft &mdash; Refrigeration and Air Conditioning, awarded with Credit by Quality and Qualifications Ireland.",
+        "desc": "Craft - Refrigeration and Air Conditioning, awarded with Credit by Quality and Qualifications Ireland.",
         "ph": "CERT PLACEHOLDER<br>QQI Level 6 certificate",
         "meta": [("Awarded", "14 June 2020, with Credit"), ("Level", "NFQ Level 6 / EQF Level 5")],
     },
@@ -589,7 +589,7 @@ CERTIFICATIONS = f"""
   <div class="wrap">
     <div class="about-grid">
       <div class="about-media reveal">
-        {img("certifications-at-work.jpg", "A heat pump system strainer being inspected during a service visit", 750, 1000)}
+        {img("certifications-at-work.jpg", "Servicing pipework on a commercial heat pump installation", 750, 1000)}
       </div>
       <div class="reveal">
         <span class="eyebrow">Control measures</span>
