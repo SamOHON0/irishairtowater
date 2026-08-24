@@ -215,7 +215,31 @@ HOME = f"""
   </div>
 </section>
 
-<section id="about" class="about bg-white">
+
+<section class="bg-white">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>What our customers say.</h2>
+      <p>Real reviews from the Irish Air to Water Facebook page.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review review-lead reveal">
+        <blockquote>&ldquo;He was absolutely fantastic from start to finish. He explained everything clearly, was very professional, and his pricing was extremely reasonable. It&rsquo;s such a relief to find someone so reliable, honest, and helpful.&rdquo;</blockquote>
+        <div class="review-who">Stephanie Callaghan<small>Facebook review</small></div>
+      </div>
+      <div class="review reveal">
+        <blockquote>&ldquo;Absolutely 10/10 service. Knew what the problem was straight away and got it sorted. I&rsquo;ve had 5 people come to look at the problem and only he knew. Recommend 100%.&rdquo;</blockquote>
+        <div class="review-who">Shawana Moriarty<small>Facebook review</small></div>
+      </div>
+      <div class="review reveal">
+        <blockquote>&ldquo;We have been having extremely high bills because of our heat pump and no knowledge as to why. Since he has looked at it, our usage on the pump has come down and our bills reduced.&rdquo;</blockquote>
+        <div class="review-who">Rebecca Fabozzi<small>Facebook review</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
   <div class="wrap about-grid">
     <div class="about-media reveal">
       {img("about-installed-unit.jpg", "A Grant Aerona air-to-water heat pump installed at a home", 750, 1000)}

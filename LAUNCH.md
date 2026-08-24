@@ -21,19 +21,22 @@ and `method` on each and delete the fake handler at the bottom of `main.js`.
 hydraulic balancing on the Services page. See `images/PHOTOS-NEEDED.md`.
 
 Still worth chasing: **a photo of Dáire himself**, and the van. The About section says
-"One name on the van" and currently sits beside a cleaned strainer in his hand.
+"One name on the van" and currently shows a finished install instead of a person.
 
 ### 3. Certificates
 6 slots on `certifications.html`. Four are in hand (QQI, Grant R290, manual handling,
 safety statement) and sit in `Downloads/Air`. Still missing: **F-GAS registration** and
 the **insurance certificate**.
 
-### 4. Logo
-`.brand-logo` in the header is a dashed placeholder.
+### 4. Logo — done
+The original logo file arrived and replaced the video-frame extract. `images/logo-mark.png`
+(the flame/snowflake mark, 360px) is the header mark and the favicon; `images/logo.png`
+(the full lockup) sits in the footer on a white tile. The header tagline now reads
+"Heat Pump Services" to match the logo's own wording.
 
-`favicon.svg` is a stand-in I drew, an amber droplet over a bone waterline on pine.
-It works and it is on-brand, but replace it when the real logo arrives. One file, both
-the `icon` and `apple-touch-icon` link tags point at it.
+The raw 1024px source in the repo root (`logo.png`) can be deleted; the processed copies
+in `images/` are what the site uses. `favicon.svg` (my drawn stand-in) is unreferenced
+and can also be deleted.
 
 ### 5. og:image — done
 `images/og-image.jpg` is a 1200x630 crop of the hero photo, wired into every page.
@@ -57,7 +60,9 @@ Swap it if a better shot arrives.
    list?" It is a one-word change.
 5. **Street address** for the LocalBusiness schema. Sligo only at present, which is fine
    if he works from home, but a full address helps local SEO.
-6. **Two videos** (1156.mp4, 1167.mp4) were supplied and are unused. Hero loop, or drop them.
+6. ~~Two videos unused~~ — used. The videos contained his logo and five real Facebook
+   reviews. The logo is now in the header and favicon; three of the reviews are on the
+   home page. The original logo file has since arrived and is in use.
 
 ---
 
@@ -74,8 +79,13 @@ sources and nothing is invented:
    control measures, the insurance wording and the RAMS disclaimer.
 4. **His certificates and email signature** — the certifications page and the trust strip.
 
-The one exception is the hydraulic balancing section, which comes from the "Hydraulic
-Balancing Matters" graphic he posted on LinkedIn, using that graphic's own labels.
+Two additions beyond those four sources, both still his own material: the hydraulic
+balancing section comes from the "Hydraulic Balancing Matters" graphic he posted on
+LinkedIn, and the "What our customers say" section on the home page carries three real
+Facebook reviews (Stephanie Callaghan, Shawana Moriarty, Rebecca Fabozzi) transcribed
+from the promo video he supplied, trimmed for length with the customers' own wording
+kept. Two more legible reviews from the same video (Roisin Mc Gloin, Niamh Clancy) are
+transcribed in the project notes if more are wanted.
 
 Deliberately **not** on the site, because no document supports it: pricing of any kind,
 response-time or turnaround promises, call-out charge policy, a county-by-county coverage

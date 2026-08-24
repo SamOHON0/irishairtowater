@@ -52,8 +52,8 @@ def header(current, title_lines=None):
 <header>
   <div class="wrap nav">
     <a class="brand" href="index.html">
-      <div class="brand-logo">LOGO</div>
-      <div class="brand-name">Irish Air to Water<small>Heat Pump Specialists</small></div>
+      <img class="brand-logo-img" src="images/logo-mark.png" alt="" width="44" height="44">
+      <div class="brand-name">Irish Air to Water<small>Heat Pump Services</small></div>
     </a>
     <ul class="nav-links">{links}</ul>
     <div class="nav-cta">
@@ -78,7 +78,7 @@ FOOTER = f"""<footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand">Irish Air to Water</div>
+        <div class="foot-logo"><img src="images/logo.png" alt="Irish Air to Water, Heat Pump Services" width="729" height="674" loading="lazy" decoding="async"></div>
         <p>Heat pump installation, commissioning, service and aftersales maintenance. F-GAS registered, Sligo-based, covering all of Ireland.</p>
       </div>
       <div>
@@ -190,8 +190,8 @@ def page(filename, title, description, body, extra_schema=None, og_type="website
 <meta property="og:image:alt" content="Air-to-water heat pump outdoor unit installed by Irish Air to Water">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0d2620">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="icon" href="images/logo-mark.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
