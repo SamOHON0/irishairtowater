@@ -16,17 +16,23 @@ clean form. Internal links keep `.html` so the folder still previews by double-c
 across index, maintenance and contact. Create a Formspree form, then set the `action`
 and `method` on each and delete the fake handler at the bottom of `main.js`.
 
-### 2. Photos — mostly done
-11 of Dáire's photos are in and sized. One placeholder remains: the manifold shot for
-hydraulic balancing on the Services page. See `images/PHOTOS-NEEDED.md`.
+### 2. Photos and video — done, zero placeholders
+All of Dáire's photos are placed, both videos are on the site (the 7-second brand
+animation is the hero, the 45-second reviews carousel sits in the reviews section with
+a poster and controls), and the balancing section uses the manifold from his own
+LinkedIn explainer graphic. There are no placeholder tiles anywhere on the site.
 
-Still worth chasing: **a photo of Dáire himself**, and the van. The About section says
-"One name on the van" and currently shows a finished install instead of a person.
+Still worth chasing for a v2: **a photo of Dáire himself**, and the van. The About
+section says "One name on the van" and currently shows a finished install instead of
+a person.
 
-### 3. Certificates
-6 slots on `certifications.html`. Four are in hand (QQI, Grant R290, manual handling,
-safety statement) and sit in `Downloads/Air`. Still missing: **F-GAS registration** and
-the **insurance certificate**.
+### 3. Certificates — 4 of 6 shown as real documents
+QQI, Grant R290, manual handling and the Safety Statement cover are rendered from the
+actual documents on `certifications.html`. F-GAS and insurance have deliberate icon
+tiles instead of images, because those documents have not been supplied; when they
+arrive, render page 1 to `images/cert-fgas.jpg` / `images/cert-insurance.jpg` and swap
+the `doc-tile` div for a `doc-frame` img in `pages.py`. No fake or stock documents are
+used anywhere.
 
 ### 4. Logo — done
 The original logo file arrived and replaced the video-frame extract. `images/logo-mark.png`

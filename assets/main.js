@@ -46,6 +46,14 @@
     });
   });
 
+  /* ---------- Autoplay video honours reduced motion ---------- */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function (v) {
+      v.removeAttribute('autoplay');
+      v.pause();
+    });
+  }
+
   /* ---------- Reveal on scroll ---------- */
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var items = document.querySelectorAll('.reveal');

@@ -131,10 +131,11 @@ HOME = f"""
         <a class="btn btn-ghost-light" href="services.html">See what we do</a>
       </div>
     </div>
-    <div class="hero-media hero-stack">
-      {img("hero-outdoor-unit.jpg", "Panasonic air-to-water heat pump outdoor unit installed beside a house", 900, 1200, eager=True, cls="stack-main")}
-      <div class="stack-small">
-        <img src="images/contact-coverage-grant-unit.jpg" alt="Grant air-to-water heat pump outdoor unit" width="750" height="1000" loading="eager" decoding="async">
+    <div class="hero-media">
+      <div class="hero-video">
+        <video autoplay muted loop playsinline preload="metadata" poster="media/brand-intro-poster.jpg" aria-label="Irish Air to Water brand animation">
+          <source src="media/brand-intro.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
@@ -239,6 +240,11 @@ HOME = f"""
       <div class="review reveal">
         <blockquote>&ldquo;We have been having extremely high bills because of our heat pump and no knowledge as to why. Since he has looked at it, our usage on the pump has come down and our bills reduced.&rdquo;</blockquote>
         <div class="review-who">Rebecca Fabozzi<small>Facebook review</small></div>
+      </div>
+      <div class="review-video reveal">
+        <video controls playsinline preload="none" poster="media/customer-reviews-poster.jpg" aria-label="More customer reviews from the Irish Air to Water Facebook page">
+          <source src="media/customer-reviews.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
@@ -379,7 +385,7 @@ SERVICES = f"""
     </div>
 
     <div class="svc-detail reveal" id="balancing">
-      <div class="svc-detail-media"><div class="ph"><span>IMAGE PLACEHOLDER<br>Manifold with flow meters<br>(approx 1000 x 750)</span></div></div>
+      <div class="svc-detail-media">{img("services-balancing-manifold.jpg", "Heating manifold with flow meters, from our hydraulic balancing explainer", 1000, 514, cls="frame-landscape")}</div>
       <div>
         <span class="eyebrow eyebrow-dark">Hydraulic Balancing</span>
         <h2>Hydraulic balancing</h2>
@@ -567,37 +573,37 @@ CERTS = [
     {
         "title": "F-GAS Registered",
         "desc": "Certification for work on refrigerant circuits. Under F-Gas Regulations, only personnel holding a valid F-Gas personal certificate may work on a refrigerant circuit, and leak checks must be recorded.",
-        "ph": "CERT PLACEHOLDER<br>F-GAS registration",
+        "media": '<div class="doc-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>',
         "meta": [("Scope", "Refrigerant circuit work and recorded leak checks")],
     },
     {
         "title": "QQI Level 6 Advanced Certificate",
         "desc": "Craft - Refrigeration and Air Conditioning, awarded with Credit by Quality and Qualifications Ireland.",
-        "ph": "CERT PLACEHOLDER<br>QQI Level 6 certificate",
+        "media": '<div class="doc-frame"><img src="images/cert-qqi.jpg" alt="QQI Level 6 Advanced Certificate awarded to Daire Cullinane" width="525" height="700" loading="lazy" decoding="async"></div>',
         "meta": [("Awarded", "14 June 2020, with Credit"), ("Level", "NFQ Level 6 / EQF Level 5")],
     },
     {
         "title": "Grant Aerona R290 Course",
         "desc": "One-day workshop on product knowledge and best practice for installing Grant R290 air source heat pumps and their associated system components.",
-        "ph": "CERT PLACEHOLDER<br>Grant R290 training certificate",
+        "media": '<div class="doc-frame"><img src="images/cert-r290.jpg" alt="Grant Aerona R290 course certificate" width="700" height="496" loading="lazy" decoding="async"></div>',
         "meta": [("Attended", "30 October 2025"), ("Provider", "Grant, grant.ie")],
     },
     {
         "title": "Manual Handling",
         "desc": "Manual handling training, as referenced in the company Safety Statement's control measures for lifting heat pump units, cylinders, gas bottles and equipment.",
-        "ph": "CERT PLACEHOLDER<br>Manual handling certificate",
+        "media": '<div class="doc-frame"><img src="images/cert-manual-handling.jpg" alt="Manual handling certificate" width="660" height="510" loading="lazy" decoding="async"></div>',
         "meta": [("Issued", "11 March 2025"), ("Valid to", "11 March 2028"), ("Certificate no.", "CERT603373")],
     },
     {
         "title": "Company Safety Statement",
         "desc": "Prepared under Section 20 of the Safety, Health and Welfare at Work Act 2005. Sets out the company's general safety policy, responsibilities, hazard identification, control measures, emergency procedures, training and competency arrangements and insurance-related safety controls.",
-        "ph": "DOC PLACEHOLDER<br>Safety Statement v2",
+        "media": '<div class="doc-frame"><img src="images/cert-safety-statement.jpg" alt="Irish Air to Water Safety Statement cover page" width="496" height="700" loading="lazy" decoding="async"></div>',
         "meta": [("Issued", "6 August 2026"), ("Review date", "6 August 2027"), ("Provided to", "Main contractors, mechanical contractors and other parties on request")],
     },
     {
         "title": "Combined Liability Insurance",
         "desc": "Public/Products Liability and Employers' Liability cover, appropriate to the work undertaken.",
-        "ph": "DOC PLACEHOLDER<br>Insurance certificate",
+        "media": '<div class="doc-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div>',
         "meta": [("Cover", "Public / Products Liability"), ("Cover", "Employers' Liability")],
     },
 ]
@@ -606,7 +612,7 @@ CERT_CARDS = ""
 for c in CERTS:
     meta = "".join(f"<li><strong>{k}:</strong> {v}</li>" for k, v in c["meta"])
     CERT_CARDS += f"""<div class="cert reveal">
-  <div class="ph"><span>{c['ph']}</span></div>
+  {c['media']}
   <h3>{c['title']}</h3>
   <p>{c['desc']}</p>
   <ul class="cert-meta">{meta}</ul>

@@ -492,6 +492,7 @@ section { padding: 92px 0; }
 .svc-detail:first-of-type { border-top: none; padding-top: 12px; }
 .svc-detail.flip .svc-detail-media { order: 2; }
 .svc-detail-media .ph, .svc-detail-media .media-frame { aspect-ratio: 4 / 4.1; }
+.svc-detail-media .frame-landscape { aspect-ratio: 1.9 / 1; }
 .svc-detail h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); margin-bottom: 14px; letter-spacing: -0.015em; }
 .svc-detail > div > p { color: var(--text-soft); margin-bottom: 18px; max-width: 56ch; }
 .tick-list { list-style: none; display: grid; gap: 11px; margin-bottom: 22px; }
@@ -666,6 +667,50 @@ section { padding: 92px 0; }
 }
 .stat span { font-size: 0.92rem; color: var(--text-soft); }
 
+/* ---------- Video ---------- */
+.hero-video {
+  aspect-ratio: 4 / 3.3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(244, 243, 238, 0.16);
+  background: var(--white);
+}
+.hero-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.review-video {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--ink);
+}
+.review-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------- Document thumbnails ---------- */
+.doc-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  overflow: hidden;
+}
+.doc-frame img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.doc-tile {
+  width: 100%;
+  aspect-ratio: 1 / 1.08;
+  background: var(--pine);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.doc-tile svg { width: 54px; height: 54px; color: var(--amber); }
+
 /* ---------- Work gallery ---------- */
 .gallery-grid {
   display: grid;
@@ -700,7 +745,7 @@ section { padding: 92px 0; }
 /* ---------- Reviews ---------- */
 .reviews-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: 1.1fr 1fr 0.72fr;
   gap: 20px;
 }
 .review {
@@ -717,7 +762,7 @@ section { padding: 92px 0; }
   border: none;
   margin: 0 0 18px;
 }
-.review-lead { grid-row: span 2; justify-content: center; background: var(--pine); border: none; }
+.review-lead { grid-column: 1; grid-row: 1 / span 2; justify-content: center; background: var(--pine); border: none; }
 .review-lead blockquote {
   font-family: 'Sora', sans-serif;
   font-size: 1.25rem;
@@ -743,7 +788,8 @@ section { padding: 92px 0; }
 .review-lead .review-who small { color: rgba(244, 243, 238, 0.65); }
 @media (max-width: 900px) {
   .reviews-grid { grid-template-columns: 1fr; }
-  .review-lead { grid-row: auto; }
+  .review-lead, .review-video { grid-column: auto; grid-row: auto; }
+  .review-video { aspect-ratio: 9 / 16; max-width: 420px; margin: 0 auto; }
 }
 
 /* ---------- FAQ accordion ---------- */

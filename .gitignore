@@ -10,5 +10,6 @@ _shots/
 
 # Raw client media dumps - keep out of the deploy
 *.mp4
+!media/*.mp4
 WhatsApp Image*
 WhatsApp Video*

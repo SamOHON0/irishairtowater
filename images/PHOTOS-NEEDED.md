@@ -21,6 +21,14 @@ except the hero.
 | contact-coverage-grant-unit.jpg | Contact, Coverage |
 | og-image.jpg | Social share card, 1200x630 crop of the hero |
 
+## Video and documents (now in use)
+
+`media/brand-intro.mp4` (his 1156.mp4, 7s logo animation) is the hero, autoplay muted
+loop with a poster; it pauses under prefers-reduced-motion. `media/customer-reviews.mp4`
+(his 1167.mp4, 45s Facebook reviews carousel) sits in the reviews section, click to play.
+Cert thumbnails in `images/cert-*.jpg` are rendered from the real documents. The
+balancing image is cropped from his own LinkedIn explainer graphic.
+
 ## Still needed
 
 1. **A photo of Dáire.** There isn't one in the batch. The About section says "One name
@@ -28,9 +36,9 @@ except the hero.
    of a cleaned strainer in his hand. It works, but a face or a shot of him at the van
    would be much stronger. Same for the Certifications page.
 2. **The van.** Nothing in the batch shows it.
-3. **A manifold with flow meters** for the hydraulic balancing section on Services. That
-   is the only remaining `<div class="ph">` placeholder on the site.
-4. **A logo**, for the header and to replace `favicon.svg`.
+3. **F-GAS registration and insurance certificate** scans, to replace the two icon
+   tiles on the certifications page with real documents.
+4. **A real manifold photo** eventually; the current image is from his explainer graphic.
 
 ## Image rules used on this site
 
