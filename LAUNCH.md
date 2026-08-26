@@ -17,10 +17,17 @@ across index, maintenance and contact. Create a Formspree form, then set the `ac
 and `method` on each and delete the fake handler at the bottom of `main.js`.
 
 ### 2. Photos and video — done, zero placeholders
-All of Dáire's photos are placed, both videos are on the site (the 7-second brand
-animation is the hero, the 45-second reviews carousel sits in the reviews section with
-a poster and controls), and the balancing section uses the manifold from his own
-LinkedIn explainer graphic. There are no placeholder tiles anywhere on the site.
+The hero is a full-bleed background video (`media/hero-reel.mp4`, 21s, 1.1MB), a slow
+pan-and-crossfade reel built with ffmpeg from five of Dáire's own install photos, graded
+dark under a pine scrim so the headline stays readable. It autoplays muted and looped,
+falls back to a poster frame, and pauses under prefers-reduced-motion. The 45-second
+Facebook reviews carousel (1167.mp4) sits in the reviews section with a poster and
+controls. The balancing section uses the manifold from his own LinkedIn explainer
+graphic. There are no placeholder tiles anywhere on the site.
+
+The 7-second brand animation (1156.mp4 → `media/brand-intro.mp4`) was the hero briefly
+but cannot work as a bleed (white background, text-unsafe); it stays in `media/` unused,
+ready for social posts or a loading treatment if ever wanted.
 
 Still worth chasing for a v2: **a photo of Dáire himself**, and the van. The About
 section says "One name on the van" and currently shows a finished install instead of

@@ -120,23 +120,18 @@ COVERAGE_BLOCK = f"""<div class="coverage reveal">
 
 # ============================================================ HOME
 HOME = f"""
-<section class="hero" style="padding:0;">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">Air-to-Water Heat Pump Specialist, Ireland-wide</span>
-      <h1>Heat pumps installed, commissioned and looked after <em>properly</em>.</h1>
-      <p class="lede">Installation, commissioning, service and aftersales maintenance for air-to-water heat pumps. F-GAS registered, Sligo-based, covering all of Ireland.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-amber" href="contact.html">Request a callback</a>
-        <a class="btn btn-ghost-light" href="services.html">See what we do</a>
-      </div>
-    </div>
-    <div class="hero-media">
-      <div class="hero-video">
-        <video autoplay muted loop playsinline preload="metadata" poster="media/brand-intro-poster.jpg" aria-label="Irish Air to Water brand animation">
-          <source src="media/brand-intro.mp4" type="video/mp4">
-        </video>
-      </div>
+<section class="hero hero-bleed">
+  <video class="bleed-video" autoplay muted loop playsinline preload="metadata" poster="media/hero-reel-poster.jpg" aria-hidden="true" tabindex="-1">
+    <source src="media/hero-reel.mp4" type="video/mp4">
+  </video>
+  <div class="bleed-scrim" aria-hidden="true"></div>
+  <div class="wrap bleed-content">
+    <span class="eyebrow">Air-to-Water Heat Pump Specialist, Ireland-wide</span>
+    <h1>Heat pumps installed, commissioned and looked after <em>properly</em>.</h1>
+    <p class="lede">Installation, commissioning, service and aftersales maintenance for air-to-water heat pumps. F-GAS registered, Sligo-based, covering all of Ireland.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-amber" href="contact.html">Request a callback</a>
+      <a class="btn btn-ghost-light" href="services.html">See what we do</a>
     </div>
   </div>
 </section>
