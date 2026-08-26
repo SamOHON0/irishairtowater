@@ -379,21 +379,14 @@ header {
   color: rgba(244, 243, 238, 0.9);
   border-top: 1px solid rgba(244, 243, 238, 0.08);
 }
-.trust-row { display: grid; grid-template-columns: repeat(4, 1fr); padding: 22px 0; }
-.trust-item {
-  text-align: center;
-  padding: 6px 16px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
-.trust-item + .trust-item { border-left: 1px solid var(--line-light); }
-.trust-item strong {
-  display: block;
-  font-family: 'Sora', sans-serif;
-  color: var(--amber);
-  font-size: 1rem;
-  margin-bottom: 2px;
+.trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 44px;
+  padding: 18px 0;
+  font-size: 0.92rem;
+  color: rgba(244, 243, 238, 0.85);
 }
 
 /* ---------- Sections ---------- */
@@ -472,19 +465,18 @@ section { padding: 92px 0; }
 .svc-feature .svc-feature-body { padding: 26px 28px 30px; }
 .svc-feature h3 { color: var(--white); }
 .svc-feature p { color: rgba(244, 243, 238, 0.75); }
-.svc-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(20, 53, 42, 0.08);
-  color: var(--pine);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: auto;
-  flex-shrink: 0;
+.svc { position: relative; overflow: hidden; }
+.svc-watermark {
+  position: absolute;
+  top: -22px;
+  right: -22px;
+  width: 160px;
+  height: 160px;
+  color: rgba(20, 53, 42, 0.07);
+  pointer-events: none;
 }
-.svc-icon svg { width: 22px; height: 22px; }
+.svc-watermark svg { width: 100%; height: 100%; }
+.svc h3, .svc p { position: relative; }
 
 /* ---------- Detailed service blocks ---------- */
 .svc-detail {
@@ -1025,8 +1017,6 @@ footer { background: var(--ink); color: rgba(244, 243, 238, 0.65); padding: 56px
 @media (max-width: 1024px) {
   .svc-grid { grid-template-columns: repeat(2, 1fr); }
   .cert-grid { grid-template-columns: repeat(2, 1fr); }
-  .trust-row { grid-template-columns: repeat(2, 1fr); gap: 8px 0; }
-  .trust-item:nth-child(3) { border-left: none; }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
@@ -1061,7 +1051,6 @@ footer { background: var(--ink); color: rgba(244, 243, 238, 0.65); padding: 56px
   .svc-grid { grid-template-columns: 1fr; }
   .svc-feature { grid-row: auto; }
   .cert-grid { grid-template-columns: 1fr; }
-  .trust-row { grid-template-columns: 1fr 1fr; }
   .brands-row { justify-content: flex-start; gap: 20px 28px; }
   .brand-mark { font-size: 1.02rem; }
   .steps { grid-template-columns: 1fr; }

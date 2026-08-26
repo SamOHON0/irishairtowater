@@ -132,10 +132,10 @@ HOME = f"""
 
 <div class="trust">
   <div class="wrap trust-row">
-    <div class="trust-item"><strong>F-GAS</strong>Registered</div>
-    <div class="trust-item"><strong>QQI Level 6</strong>Refrigeration &amp; Air Conditioning</div>
-    <div class="trust-item"><strong>R290</strong>Heat Pump Trained</div>
-    <div class="trust-item"><strong>Nationwide</strong>Sligo-based, all of Ireland</div>
+    <span>F-GAS Registered</span>
+    <span>QQI Level 6 Refrigeration &amp; Air Conditioning</span>
+    <span>R290 Heat Pump Trained</span>
+    <span>Sligo-based, covering all of Ireland</span>
   </div>
 </div>
 
@@ -154,22 +154,22 @@ HOME = f"""
         </div>
       </a>
       <a class="svc reveal" href="services.html#commissioning">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
         <h3>Commissioning</h3>
         <p>Correct setup from day one: checks, settings, optimisation, and clear handover.</p>
       </a>
       <a class="svc reveal" href="services.html#repairs">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
         <h3>Service &amp; Repairs</h3>
         <p>Fault finding, alarms, cycling issues, DHW temperature problems and performance optimisation.</p>
       </a>
       <a class="svc reveal" href="services.html#aftersales">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
         <h3>Aftersales Maintenance</h3>
         <p>Planned servicing and callouts to keep systems running efficiently year-round.</p>
       </a>
       <a class="svc reveal" href="maintenance.html">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h3>Annual Maintenance Visit</h3>
         <p>What your yearly visit includes, and what falls outside it. Shared with every customer before the visit.</p>
       </a>
@@ -678,19 +678,19 @@ NOT_FOUND = f"""
     <div class="sec-head reveal"><h2>Useful links.</h2></div>
     <div class="svc-grid">
       <a class="svc reveal" href="services.html">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
         <h3>Services</h3><p>Installation, commissioning, service and repairs, aftersales maintenance.</p>
       </a>
       <a class="svc reveal" href="maintenance.html">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
         <h3>Annual maintenance</h3><p>What your yearly visit includes and what's chargeable.</p>
       </a>
       <a class="svc reveal" href="certifications.html">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h3>Certifications</h3><p>F-GAS, QQI Level 6, R290 training, Safety Statement and insurance.</p>
       </a>
       <a class="svc reveal" href="contact.html">
-        <div class="svc-icon">{ICON_PHONE}</div>
+        <div class="svc-watermark" aria-hidden="true">{ICON_PHONE}</div>
         <h3>Contact</h3><p>Phone, WhatsApp, email and a callback form.</p>
       </a>
     </div>
