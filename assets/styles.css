@@ -278,7 +278,22 @@ header {
 }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 .hero-media { position: relative; }
-.hero-media .ph, .hero-media .media-frame { aspect-ratio: 4 / 4.2; }
+.hero-media .ph { aspect-ratio: 4 / 4.2; }
+.hero-stack { position: relative; }
+.hero-stack .stack-main { aspect-ratio: 4 / 3.9; }
+.hero-stack .stack-small {
+  position: absolute;
+  left: -36px;
+  bottom: -44px;
+  width: 45%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 5px solid var(--pine-deep);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.4);
+  background: var(--bone-dim);
+}
+.hero-stack .stack-small img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-badge {
   position: absolute;
   left: -18px;
@@ -651,6 +666,37 @@ section { padding: 92px 0; }
 }
 .stat span { font-size: 0.92rem; color: var(--text-soft); }
 
+/* ---------- Work gallery ---------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 16px;
+}
+.g-item {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bone-dim);
+}
+.g-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.g-tall { grid-row: span 2; }
+
+/* ---------- Coverage band ---------- */
+.coverage-band { background: var(--pine); color: var(--bone); padding: 64px 0; }
+.coverage-band-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.coverage-band h2 { color: var(--white); font-size: clamp(1.5rem, 2.6vw, 2.05rem); margin-bottom: 8px; letter-spacing: -0.015em; }
+.coverage-band p { color: rgba(244, 243, 238, 0.75); }
+.coverage-band .tick-list { display: flex; gap: 24px; flex-wrap: wrap; }
+.coverage-band .tick-list li { color: rgba(244, 243, 238, 0.88); white-space: nowrap; }
+.coverage-band .tick-list svg { color: var(--amber); }
+
 /* ---------- Reviews ---------- */
 .reviews-grid {
   display: grid;
@@ -889,6 +935,10 @@ footer { background: var(--ink); color: rgba(244, 243, 238, 0.65); padding: 56px
   .svc-detail.flip .svc-detail-media { order: 0; }
   .hero-grid { padding: 48px 24px 64px; }
   .hero-badge { left: 12px; bottom: 16px; }
+  .hero-stack .stack-small { display: none; }
+  .hero-stack .stack-main { aspect-ratio: 4 / 3.2; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+  .coverage-band .tick-list { gap: 10px 24px; }
   .prob-cols { grid-template-columns: 1fr; }
   .about-grid .about-media { order: -1; }
   section { padding: 64px 0; }

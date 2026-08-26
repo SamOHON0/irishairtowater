@@ -131,14 +131,10 @@ HOME = f"""
         <a class="btn btn-ghost-light" href="services.html">See what we do</a>
       </div>
     </div>
-    <div class="hero-media">
-      {img("hero-outdoor-unit.jpg", "Panasonic air-to-water heat pump outdoor unit installed beside a house", 900, 1200, eager=True)}
-      <div class="hero-badge">
-        <div class="dot-cert">F&#8209;GAS</div>
-        <div>
-          <strong>F-GAS Registered</strong>
-          <small>Certified refrigerant handling</small>
-        </div>
+    <div class="hero-media hero-stack">
+      {img("hero-outdoor-unit.jpg", "Panasonic air-to-water heat pump outdoor unit installed beside a house", 900, 1200, eager=True, cls="stack-main")}
+      <div class="stack-small">
+        <img src="images/contact-coverage-grant-unit.jpg" alt="Grant air-to-water heat pump outdoor unit" width="750" height="1000" loading="eager" decoding="async">
       </div>
     </div>
   </div>
@@ -206,17 +202,26 @@ HOME = f"""
   </div>
 </section>
 
-<section class="sec-tight" id="brands">
+<section class="bg-white">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>Brands we work with.</h2>
+      <h2>Recent work.</h2>
+      <p>Installs and service visits, photographed on the job.</p>
     </div>
-    <div class="brands-row reveal">{BRANDS_ROW}</div>
+    <div class="gallery-grid reveal">
+      <div class="g-item g-tall"><img src="images/coverage-home-install.jpg" alt="Finished Panasonic air-to-water heat pump installation" width="750" height="1000" loading="lazy" decoding="async"></div>
+      <div class="g-item"><img src="images/services-commissioning-controls.jpg" alt="Heat pump control board during commissioning" width="750" height="1000" loading="lazy" decoding="async"></div>
+      <div class="g-item"><img src="images/services-aftersales-filters.jpg" alt="Air filters removed for cleaning on a service visit" width="750" height="1000" loading="lazy" decoding="async"></div>
+      <div class="g-item g-tall"><img src="images/certifications-at-work.jpg" alt="Servicing pipework on a commercial heat pump installation" width="750" height="1000" loading="lazy" decoding="async"></div>
+      <div class="g-item"><img src="images/services-installation.jpg" alt="Wall-mounted heat pump unit with pipework" width="562" height="1000" loading="lazy" decoding="async"></div>
+      <div class="g-item"><img src="images/maintenance-clear-access.jpg" alt="Outdoor heat pump unit sited with clear space around it" width="750" height="1000" loading="lazy" decoding="async"></div>
+    </div>
   </div>
 </section>
 
 
-<section class="bg-white">
+
+<section>
   <div class="wrap">
     <div class="sec-head reveal">
       <h2>What our customers say.</h2>
@@ -239,7 +244,7 @@ HOME = f"""
   </div>
 </section>
 
-<section id="about" class="about">
+<section id="about" class="about bg-white">
   <div class="wrap about-grid">
     <div class="about-media reveal">
       {img("about-installed-unit.jpg", "A Grant Aerona air-to-water heat pump installed at a home", 750, 1000)}
@@ -255,12 +260,26 @@ HOME = f"""
   </div>
 </section>
 
-<section id="coverage">
-  <div class="wrap coverage-grid">
-    {COVERAGE_BLOCK}
-    <div class="coverage-media reveal">
-      {img("coverage-home-install.jpg", "A finished air-to-water heat pump installation at an Irish home", 750, 1000)}
+<section id="coverage" class="coverage-band" style="padding:64px 0">
+  <div class="wrap coverage-band-inner">
+    <div class="reveal">
+      <h2>Sligo-based. Covering all of Ireland.</h2>
+      <p>Air-to-water heat pump work across Ireland, for domestic and commercial systems.</p>
     </div>
+    <ul class="tick-list reveal">
+      <li>{TICK}Based in Sligo</li>
+      <li>{TICK}Covering all of Ireland</li>
+      <li>{TICK}Domestic and commercial</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec-tight" id="brands">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Brands we work with.</h2>
+    </div>
+    <div class="brands-row reveal">{BRANDS_ROW}</div>
   </div>
 </section>
 

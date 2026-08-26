@@ -102,6 +102,12 @@ Two judgement calls worth flagging to Dáire:
 
 ## Already done
 
+Home page layout (26 Aug pass): the hero is a layered two-photo composition of his real
+installs, six photos sit in a "Recent work" gallery under the common-issues band, coverage
+is a slim pine band instead of a third split-section, and the brands strip moved to just
+above contact. The hero F-GAS badge was removed because the trust strip directly below it
+says the same thing.
+
 Six pages plus a styled 404. Mobile nav and FAQ accordions. Per-page titles, descriptions,
 canonicals and OG tags. `HVACBusiness` JSON-LD on every page with services, credentials and
 area served, plus a `FAQPage` block on the maintenance page. robots.txt, sitemap.xml,
