@@ -21,7 +21,9 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: clip; }
 html { scroll-behavior: smooth; }
+body.nav-open { overflow: hidden; }
 body {
   font-family: 'Outfit', sans-serif;
   color: var(--text);
@@ -234,6 +236,9 @@ header {
   border-top: 1px solid var(--line);
   background: var(--bone);
   padding: 18px 24px 26px;
+  max-height: calc(100svh - 72px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .mobile-panel.open { display: block; }
 .mobile-panel ul { list-style: none; display: grid; gap: 2px; margin-bottom: 18px; }
@@ -393,6 +398,7 @@ header {
 
 /* ---------- Sections ---------- */
 section { padding: 92px 0; }
+[id] { scroll-margin-top: 84px; }
 .sec-tight { padding: 64px 0; }
 .sec-head { max-width: 640px; margin-bottom: 52px; }
 .sec-head-center { max-width: 660px; margin-left: auto; margin-right: auto; text-align: center; }
@@ -682,7 +688,7 @@ section { padding: 92px 0; }
   overflow: hidden;
   display: flex;
   align-items: center;
-  min-height: min(86dvh, 720px);
+  min-height: min(86svh, 720px);
   padding: 88px 0;
 }
 .bleed-video {
@@ -1035,7 +1041,7 @@ footer { background: var(--ink); color: rgba(244, 243, 238, 0.65); padding: 56px
   .hero-badge { left: 12px; bottom: 16px; }
   .hero-stack .stack-small { display: none; }
   .hero-stack .stack-main { aspect-ratio: 4 / 3.2; }
-  .hero-bleed { min-height: min(78dvh, 640px); padding: 72px 0; }
+  .hero-bleed { min-height: min(78svh, 640px); padding: 72px 0; }
   .bleed-scrim::after {
     content: "";
     position: absolute;

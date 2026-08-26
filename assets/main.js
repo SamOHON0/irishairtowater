@@ -7,32 +7,28 @@
   var panel = document.getElementById('mobile-panel');
 
   if (toggle && panel) {
+    var setMenu = function (open) {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.classList.toggle('open', open);
+      document.body.classList.toggle('nav-open', open);
+    };
     toggle.addEventListener('click', function () {
-      var open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      panel.classList.toggle('open', !open);
+      setMenu(toggle.getAttribute('aria-expanded') !== 'true');
     });
 
     panel.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        toggle.setAttribute('aria-expanded', 'false');
-        panel.classList.remove('open');
-      }
+      if (e.target.closest('a')) setMenu(false);
     });
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-        toggle.setAttribute('aria-expanded', 'false');
-        panel.classList.remove('open');
+        setMenu(false);
         toggle.focus();
       }
     });
 
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 900) {
-        toggle.setAttribute('aria-expanded', 'false');
-        panel.classList.remove('open');
-      }
+      if (window.innerWidth > 900) setMenu(false);
     });
   }
 
