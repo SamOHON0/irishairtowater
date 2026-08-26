@@ -91,23 +91,17 @@ def form_card(heading, sub, submit_label="Send request"):
 </div>"""
 
 
-# His site's exact five. Headings are his wording; the sub-lines only restate them.
+# His site's exact five common issues, verbatim.
 PROBLEMS = [
-    ("High electricity bills / low efficiency", "The system runs, but it costs more to run than it should."),
-    ("Heat pump cycling on/off", "The unit starts and stops repeatedly instead of running steadily."),
-    ("DHW not reaching temperature", "Domestic hot water not getting to, or holding, the temperature it should."),
-    ("Cold rooms / poor heat output", "Some rooms never reach temperature while others are fine."),
-    ("Noise, alarms, or frequent defrost", "New noise, repeat alarms, or the system defrosting more often than expected."),
+    "High electricity bills / low efficiency",
+    "Heat pump cycling on/off",
+    "DHW not reaching temperature",
+    "Cold rooms / poor heat output",
+    "Noise, alarms, or frequent defrost",
 ]
-PROB_BLOCKS = "".join(
-    f"""<div class="prob reveal">
-      <div class="prob-num">{i:02d}</div>
-      <div><h3>{h}</h3><p>{p}</p></div>
-    </div>""" for i, (h, p) in enumerate(PROBLEMS, 1)
-)
+PROB_BLOCKS = "".join(f"<li>{TICK}{h}</li>" for h in PROBLEMS)
 
 COVERAGE_BLOCK = f"""<div class="coverage reveal">
-  <span class="eyebrow eyebrow-dark">Coverage</span>
   <h2>Sligo-based. Covering all of Ireland.</h2>
   <p>Air-to-water heat pump work across Ireland, for domestic and commercial systems.</p>
   <ul class="tick-list">
@@ -157,32 +151,27 @@ HOME = f"""
         <div class="svc-feature-body">
           <h3>Installation</h3>
           <p>Air-to-water heat pump installation for domestic and commercial systems, through to commissioning and handover.</p>
-          <div class="svc-more" style="color:#e8a33d">Read more &rarr;</div>
         </div>
       </a>
       <a class="svc reveal" href="services.html#commissioning">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
         <h3>Commissioning</h3>
         <p>Correct setup from day one: checks, settings, optimisation, and clear handover.</p>
-        <div class="svc-more">Read more &rarr;</div>
       </a>
       <a class="svc reveal" href="services.html#repairs">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
         <h3>Service &amp; Repairs</h3>
         <p>Fault finding, alarms, cycling issues, DHW temperature problems and performance optimisation.</p>
-        <div class="svc-more">Read more &rarr;</div>
       </a>
       <a class="svc reveal" href="services.html#aftersales">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
         <h3>Aftersales Maintenance</h3>
         <p>Planned servicing and callouts to keep systems running efficiently year-round.</p>
-        <div class="svc-more">Read more &rarr;</div>
       </a>
       <a class="svc reveal" href="maintenance.html">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h3>Annual Maintenance Visit</h3>
         <p>What your yearly visit includes, and what falls outside it. Shared with every customer before the visit.</p>
-        <div class="svc-more">Read more &rarr;</div>
       </a>
     </div>
   </div>
@@ -191,10 +180,10 @@ HOME = f"""
 <section class="bg-pine">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>Common issues we're called out for.</h2>
-      <p>If any of these sound familiar, get in touch and we'll take a look.</p>
+      <h2>Common issues.</h2>
+      <p>If any of these sound familiar, get in touch.</p>
     </div>
-    <div class="prob-cols">{PROB_BLOCKS}</div>
+    <ul class="tick-list issues-list reveal">{PROB_BLOCKS}</ul>
   </div>
 </section>
 
@@ -202,7 +191,6 @@ HOME = f"""
   <div class="wrap">
     <div class="sec-head reveal">
       <h2>Recent work.</h2>
-      <p>Installs and service visits, photographed on the job.</p>
     </div>
     <div class="gallery-grid reveal">
       <div class="g-item g-tall"><img src="images/coverage-home-install.jpg" alt="Finished Panasonic air-to-water heat pump installation" width="750" height="1000" loading="lazy" decoding="async"></div>
@@ -221,7 +209,7 @@ HOME = f"""
   <div class="wrap">
     <div class="sec-head reveal">
       <h2>What our customers say.</h2>
-      <p>Real reviews from the Irish Air to Water Facebook page.</p>
+      <p>From the Irish Air to Water Facebook page.</p>
     </div>
     <div class="reviews-grid">
       <div class="review review-lead reveal">
@@ -251,8 +239,7 @@ HOME = f"""
       {img("about-installed-unit.jpg", "A Grant Aerona air-to-water heat pump installed at a home", 750, 1000)}
     </div>
     <div class="reveal">
-      <span class="eyebrow eyebrow-dark">About</span>
-      <h2>One name on the van. One person responsible for your system.</h2>
+      <h2>About Irish Air to Water.</h2>
       <p>Irish Air to Water is run by D&aacute;ire Cullinane, an F-GAS registered heat pump specialist based in Sligo and working across all of Ireland.</p>
       <p>He holds a QQI Level 6 Advanced Certificate in Refrigeration and Air Conditioning, awarded with Credit, and is trained on Grant R290 air source heat pumps.</p>
       <div class="sig">D&aacute;ire Cullinane<small>Proprietor, Irish Air to Water</small></div>
@@ -301,7 +288,6 @@ HOME = f"""
 SERVICES = f"""
 <section class="page-hero">
   <div class="wrap">
-    <span class="eyebrow">Services</span>
     <h1>Air-to-water heat pump services.</h1>
     <p>Installation, commissioning, service and repairs, and aftersales maintenance. Domestic and commercial systems, Sligo-based, covering all of Ireland.</p>
     <ul class="crumbs"><li><a href="index.html">Home</a></li><li>Services</li></ul>
@@ -314,7 +300,6 @@ SERVICES = f"""
     <div class="svc-detail reveal" id="installation">
       <div class="svc-detail-media">{img("services-installation.jpg", "Wall-mounted heat pump unit with pipework run down the wall", 562, 1000)}</div>
       <div>
-        <span class="eyebrow eyebrow-dark">Installation</span>
         <h2>Installation</h2>
         <p>Installation of domestic and commercial air-to-water heat pump systems, through to commissioning and handover.</p>
         <ul class="tick-list">
@@ -325,14 +310,12 @@ SERVICES = f"""
           <li>{TICK}System handover</li>
         </ul>
         <p style="font-size:0.9rem">Electrical installation work is carried out in accordance with the National Rules for Electrical Installations (I.S. 10101). Where the scope requires a Registered Electrical Contractor, this is arranged and coordinated accordingly.</p>
-        <a class="btn btn-amber btn-sm" href="contact.html">Talk to us about an install</a>
       </div>
     </div>
 
     <div class="svc-detail flip reveal" id="commissioning">
       <div class="svc-detail-media">{img("services-commissioning-controls.jpg", "Heat pump control board and wiring inside an opened control panel", 750, 1000)}</div>
       <div>
-        <span class="eyebrow eyebrow-dark">Commissioning</span>
         <h2>Commissioning</h2>
         <p>Correct setup from day one: checks, settings, optimisation, and clear handover.</p>
         <ul class="tick-list">
@@ -341,14 +324,12 @@ SERVICES = f"""
           <li>{TICK}Optimisation of system performance</li>
           <li>{TICK}Clear handover so you understand your controls</li>
         </ul>
-        <a class="btn btn-amber btn-sm" href="contact.html">Book a commissioning visit</a>
       </div>
     </div>
 
     <div class="svc-detail reveal" id="repairs">
       <div class="svc-detail-media">{img("services-repairs-strainer-check.jpg", "A system strainer checked in hand during a service call", 937, 1000)}</div>
       <div>
-        <span class="eyebrow eyebrow-dark">Service &amp; Repairs</span>
         <h2>Service &amp; repairs</h2>
         <p>Fault finding, alarms, cycling issues, DHW temperature problems and performance optimisation.</p>
         <ul class="tick-list">
@@ -359,14 +340,12 @@ SERVICES = f"""
           <li>{TICK}Performance optimisation</li>
         </ul>
         <p style="font-size:0.9rem">Work on refrigerant circuits is carried out only by F-Gas certified personnel, using certified recovery equipment. Refrigerant is never vented to atmosphere.</p>
-        <a class="btn btn-amber btn-sm" href="contact.html">Describe the fault</a>
       </div>
     </div>
 
     <div class="svc-detail flip reveal" id="aftersales">
       <div class="svc-detail-media">{img("services-aftersales-filters.jpg", "Air filters removed and laid out for cleaning during a service visit", 750, 1000)}</div>
       <div>
-        <span class="eyebrow eyebrow-dark">Aftersales Maintenance</span>
         <h2>Aftersales maintenance</h2>
         <p>Planned servicing and callouts to keep systems running efficiently year-round.</p>
         <ul class="tick-list">
@@ -382,7 +361,6 @@ SERVICES = f"""
     <div class="svc-detail reveal" id="balancing">
       <div class="svc-detail-media">{img("services-balancing-manifold.jpg", "Heating manifold with flow meters, from our hydraulic balancing explainer", 1000, 514, cls="frame-landscape")}</div>
       <div>
-        <span class="eyebrow eyebrow-dark">Hydraulic Balancing</span>
         <h2>Hydraulic balancing</h2>
         <p>Sometimes the heat source is not the problem. Short loops get too much flow and long loops get too little, so one room runs warm while another sits cool.</p>
         <ul class="tick-list">
@@ -390,7 +368,6 @@ SERVICES = f"""
           <li>{TICK}Flow meter adjusted by circuit</li>
           <li>{TICK}More even room temperatures</li>
         </ul>
-        <a class="btn btn-amber btn-sm" href="contact.html">Ask about balancing</a>
       </div>
     </div>
 
@@ -461,7 +438,6 @@ NEED_LI = "".join(f"<li>{TICK}{t}</li>" for t in NEEDED)
 MAINTENANCE = f"""
 <section class="page-hero">
   <div class="wrap">
-    <span class="eyebrow">Annual maintenance</span>
     <h1>Your annual maintenance visit.</h1>
     <p>What's included, and what's chargeable. We share this with all customers ahead of their visit so there are no surprises.</p>
     <ul class="crumbs"><li><a href="index.html">Home</a></li><li>Maintenance Plan</li></ul>
@@ -507,7 +483,6 @@ MAINTENANCE = f"""
   <div class="wrap">
     <div class="about-grid">
       <div class="reveal">
-        <span class="eyebrow">Your side of it</span>
         <h2>What we need from you.</h2>
         <ul class="tick-list" style="margin-top:22px">{NEED_LI}</ul>
       </div>
@@ -543,7 +518,6 @@ MAINTENANCE = f"""
 <section>
   <div class="wrap-narrow">
     <div class="sec-head reveal" style="margin-bottom:34px">
-      <span class="eyebrow eyebrow-dark">FAQ</span>
       <h2>Maintenance questions.</h2>
     </div>
     <div class="reveal">{faq_block(MAINT_FAQS)}</div>
@@ -616,7 +590,6 @@ for c in CERTS:
 CERTIFICATIONS = f"""
 <section class="page-hero">
   <div class="wrap">
-    <span class="eyebrow">Certifications</span>
     <h1>Certified, registered and insured.</h1>
     <p>Documentation is available to homeowners, main contractors and mechanical contractors on request.</p>
     <ul class="crumbs"><li><a href="index.html">Home</a></li><li>Certifications</li></ul>
@@ -636,7 +609,6 @@ CERTIFICATIONS = f"""
         {img("certifications-at-work.jpg", "Servicing pipework on a commercial heat pump installation", 750, 1000)}
       </div>
       <div class="reveal">
-        <span class="eyebrow">Control measures</span>
         <h2>How we work on site.</h2>
         <p style="color:rgba(244,243,238,0.78);margin-bottom:20px">From the company Safety Statement.</p>
         <ul class="tick-list">
@@ -660,7 +632,6 @@ CERTIFICATIONS = f"""
 CONTACT = f"""
 <section class="page-hero">
   <div class="wrap">
-    <span class="eyebrow">Contact</span>
     <h1>Get in touch.</h1>
     <p>Call, WhatsApp, email or send the form. Sligo-based, covering all of Ireland, domestic and commercial.</p>
     <ul class="crumbs"><li><a href="index.html">Home</a></li><li>Contact</li></ul>
@@ -693,7 +664,6 @@ CONTACT = f"""
 NOT_FOUND = f"""
 <section class="page-hero" style="padding:96px 0 100px">
   <div class="wrap">
-    <span class="eyebrow">404</span>
     <h1>That page doesn't exist.</h1>
     <p>It may have moved, or the link may be wrong. Everything is one click away below.</p>
     <div class="hero-ctas" style="margin-top:32px">
@@ -705,7 +675,7 @@ NOT_FOUND = f"""
 
 <section>
   <div class="wrap">
-    <div class="sec-head reveal"><h2>Where you were probably headed.</h2></div>
+    <div class="sec-head reveal"><h2>Useful links.</h2></div>
     <div class="svc-grid">
       <a class="svc reveal" href="services.html">
         <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>

@@ -520,6 +520,15 @@ section { padding: 92px 0; }
 .prob h3 { color: var(--white); font-size: 1.08rem; margin-bottom: 6px; }
 .prob p { color: rgba(244, 243, 238, 0.72); font-size: 0.95rem; }
 
+.issues-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 48px;
+  max-width: 860px;
+}
+.bg-pine .issues-list li { color: rgba(244, 243, 238, 0.88); font-size: 1.05rem; }
+@media (max-width: 600px) { .issues-list { grid-template-columns: 1fr; } }
+
 /* ---------- Brands ---------- */
 .brands-row {
   display: flex;
