@@ -120,9 +120,9 @@ COVERAGE_BLOCK = f"""<div class="coverage reveal">
 
 # ============================================================ HOME
 HOME = f"""
-<section class="hero hero-bleed">
-  <video class="bleed-video" autoplay muted loop playsinline preload="metadata" poster="media/hero-reel-poster.jpg" aria-hidden="true" tabindex="-1">
-    <source src="media/hero-reel.mp4" type="video/mp4">
+<section class="hero hero-bleed hero-light">
+  <video class="bleed-video" autoplay muted loop playsinline preload="metadata" poster="media/brand-intro-poster.jpg" aria-hidden="true" tabindex="-1">
+    <source src="media/brand-intro.mp4" type="video/mp4">
   </video>
   <div class="bleed-scrim" aria-hidden="true"></div>
   <div class="wrap bleed-content">
@@ -131,7 +131,7 @@ HOME = f"""
     <p class="lede">Installation, commissioning, service and aftersales maintenance for air-to-water heat pumps. F-GAS registered, Sligo-based, covering all of Ireland.</p>
     <div class="hero-ctas">
       <a class="btn btn-amber" href="contact.html">Request a callback</a>
-      <a class="btn btn-ghost-light" href="services.html">See what we do</a>
+      <a class="btn btn-ghost" href="services.html">See what we do</a>
     </div>
   </div>
 </section>

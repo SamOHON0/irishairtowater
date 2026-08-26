@@ -22,6 +22,7 @@ for p in pages:
                 errors.append(f"{p.name}: dead in-page anchor {href}")
             continue
         target, _, frag = href.partition("#")
+        target = target.split("?")[0]  # strip cache-bust query
         if target and not target.endswith(".html"):
             # static asset (css, js, favicon, image)
             if not (ROOT / target).exists():

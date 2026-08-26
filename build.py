@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Static site builder for Irish Air to Water. Emits plain HTML files."""
 
-import os, json, pathlib
+import os, json, pathlib, hashlib
 
 OUT = pathlib.Path(__file__).parent
 SITE = "https://irishairtowater.com"
@@ -117,7 +117,7 @@ FOOTER = f"""<footer>
   </div>
 </footer>
 <a class="wa-float" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">{ICON_WA}</a>
-<script src="assets/main.js"></script>"""
+<script src="assets/main.js?v=__MAINJS_V__"></script>"""
 
 
 CTA_BAND = f"""<section class="cta-band">
@@ -160,6 +160,11 @@ LOCAL_BUSINESS = {
 }
 
 
+def _asset_v(relpath):
+    """Short content hash so long-cached assets bust on change."""
+    return hashlib.md5((OUT / relpath).read_bytes()).hexdigest()[:8]
+
+
 def page(filename, title, description, body, extra_schema=None, og_type="website"):
     schema = [LOCAL_BUSINESS]
     if extra_schema:
@@ -169,6 +174,7 @@ def page(filename, title, description, body, extra_schema=None, og_type="website
     )
     # Vercel cleanUrls is on, so the served URL has no .html extension.
     canonical = f"{SITE}/" if filename == "index.html" else f"{SITE}/{filename[:-5]}"
+    html_footer_v = _asset_v("assets/main.js")
     html = f"""<!DOCTYPE html>
 <html lang="en-IE">
 <head>
@@ -195,7 +201,7 @@ def page(filename, title, description, body, extra_schema=None, og_type="website
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v={_asset_v('assets/styles.css')}">
 {schema_tags}
 </head>
 <body>
@@ -207,6 +213,7 @@ def page(filename, title, description, body, extra_schema=None, og_type="website
 </body>
 </html>
 """
+    html = html.replace("__MAINJS_V__", html_footer_v)
     (OUT / filename).write_text(html, encoding="utf-8")
     print("wrote", filename)
 

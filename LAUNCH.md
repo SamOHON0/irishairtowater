@@ -17,17 +17,23 @@ across index, maintenance and contact. Create a Formspree form, then set the `ac
 and `method` on each and delete the fake handler at the bottom of `main.js`.
 
 ### 2. Photos and video — done, zero placeholders
-The hero is a full-bleed background video (`media/hero-reel.mp4`, 21s, 1.1MB), a slow
-pan-and-crossfade reel built with ffmpeg from five of Dáire's own install photos, graded
-dark under a pine scrim so the headline stays readable. It autoplays muted and looped,
-falls back to a poster frame, and pauses under prefers-reduced-motion. The 45-second
-Facebook reviews carousel (1167.mp4) sits in the reviews section with a poster and
-controls. The balancing section uses the manifold from his own LinkedIn explainer
-graphic. There are no placeholder tiles anywhere on the site.
+The hero is Dáire's own 7-second brand animation (1156.mp4 → `media/brand-intro.mp4`)
+as a full-bleed light hero: the animation plays large on the right, ink headline over a
+white scrim on the left. Autoplay muted loop, poster fallback, pauses under
+prefers-reduced-motion. The 45-second Facebook reviews carousel (1167.mp4) sits in the
+reviews section with a poster and controls. The balancing section uses the manifold from
+his own LinkedIn explainer graphic. No placeholder tiles anywhere.
 
-The 7-second brand animation (1156.mp4 → `media/brand-intro.mp4`) was the hero briefly
-but cannot work as a bleed (white background, text-unsafe); it stays in `media/` unused,
-ready for social posts or a loading treatment if ever wanted.
+`media/hero-reel.mp4` (a 21s pan-and-crossfade reel built from his install photos) is an
+unused alternative hero background; keep or delete.
+
+### 2b. CACHE FIX — important
+`vercel.json` gives `/assets` a one-year immutable cache, which froze the first-deployed
+stylesheet in browsers and broke the layout as the site evolved. Fixed by content-hashing
+the asset URLs: every page now links `styles.css?v=<hash>` and `main.js?v=<hash>`, and the
+hash changes automatically when `python3 pages.py` runs after an asset edit. If you edit
+CSS/JS by hand WITHOUT regenerating, browsers keep the old file: always rerun
+`python3 pages.py` after touching anything in `assets/`.
 
 Still worth chasing for a v2: **a photo of Dáire himself**, and the van. The About
 section says "One name on the van" and currently shows a finished install instead of
