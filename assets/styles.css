@@ -414,6 +414,7 @@ section { padding: 92px 0; }
   grid-auto-rows: minmax(190px, auto);
   gap: 18px;
 }
+.svc-grid-3 { grid-auto-rows: minmax(210px, auto); }
 .svc {
   border-radius: var(--radius);
   padding: 30px 28px;

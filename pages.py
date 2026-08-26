@@ -43,10 +43,10 @@ CONTACT_LIST = f"""<ul class="contact-list">
 </ul>"""
 
 
-def form_card(heading, sub, submit_label="Send request"):
+def form_card(heading, sub, submit_label="Send enquiry"):
+    sub_html = f'\n  <p class="form-sub">{sub}</p>' if sub else ""
     return f"""<div class="form-card reveal">
-  <h3>{heading}</h3>
-  <p class="form-sub">{sub}</p>
+  <h3>{heading}</h3>{sub_html}
   <form data-iatw-form>
     <div class="field-row">
       <div class="field">
@@ -59,32 +59,22 @@ def form_card(heading, sub, submit_label="Send request"):
       </div>
     </div>
     <div class="field">
-      <label for="f-email">Email <span style="font-weight:400;color:#5c6b64">(optional)</span></label>
-      <input id="f-email" type="email" name="email" autocomplete="email">
-    </div>
-    <div class="field-row">
-      <div class="field">
-        <label for="f-county">County</label>
-        <input id="f-county" type="text" name="county" placeholder="e.g. Sligo">
-      </div>
-      <div class="field">
-        <label for="f-type">What do you need?</label>
-        <select id="f-type" name="type">
-          <option>Installation</option>
-          <option>Commissioning</option>
-          <option>Service or repair</option>
-          <option>Aftersales maintenance</option>
-          <option>Something else</option>
-        </select>
-      </div>
+      <label for="f-county">County</label>
+      <input id="f-county" type="text" name="county">
     </div>
     <div class="field">
-      <label for="f-brand">Heat pump brand and model <span style="font-weight:400;color:#5c6b64">(if known)</span></label>
+      <label for="f-brand">Heat pump brand / model</label>
       <input id="f-brand" type="text" name="brand">
     </div>
     <div class="field">
-      <label for="f-msg">Tell us a little about the job</label>
-      <textarea id="f-msg" name="message"></textarea>
+      <label for="f-type">What do you need?</label>
+      <select id="f-type" name="type">
+        <option>Commissioning</option>
+        <option>Service or repair</option>
+        <option>Aftersales maintenance</option>
+        <option>Installation</option>
+        <option>Something else</option>
+      </select>
     </div>
     <button class="btn btn-amber" type="submit" style="width:100%; justify-content:center;">{submit_label}</button>
   </form>
@@ -113,6 +103,8 @@ COVERAGE_BLOCK = f"""<div class="coverage reveal">
 
 
 # ============================================================ HOME
+# Section order and copy mirror irishairtowater.com. His wording is verbatim
+# except em dashes (house rule: none) and bullet separators.
 HOME = f"""
 <section class="hero hero-bleed hero-light">
   <video class="bleed-video" autoplay muted loop playsinline preload="metadata" poster="media/brand-intro-poster.jpg" aria-hidden="true" tabindex="-1">
@@ -120,12 +112,11 @@ HOME = f"""
   </video>
   <div class="bleed-scrim" aria-hidden="true"></div>
   <div class="wrap bleed-content">
-    <span class="eyebrow">Air-to-Water Heat Pump Specialist, Ireland-wide</span>
-    <h1>Heat pumps installed, commissioned and looked after <em>properly</em>.</h1>
-    <p class="lede">Installation, commissioning, service and aftersales maintenance for air-to-water heat pumps. F-GAS registered, Sligo-based, covering all of Ireland.</p>
+    <h1>Air-to-Water Heat Pump Specialist, Ireland-wide.</h1>
+    <p class="lede">Sligo-based, providing nationwide coverage across Ireland for air-to-water heat pump commissioning, servicing, repairs, and aftersales maintenance. Domestic and commercial systems supported.</p>
     <div class="hero-ctas">
-      <a class="btn btn-amber" href="contact.html">Request a callback</a>
-      <a class="btn btn-ghost" href="services.html">See what we do</a>
+      <a class="btn btn-amber" href="tel:{PHONE_TEL}">{ICON_PHONE}Call {PHONE_DISPLAY}</a>
+      <a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
 </section>
@@ -139,20 +130,9 @@ HOME = f"""
   </div>
 </div>
 
-<section id="services">
+<section id="services" class="sec-tight">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Air-to-water heat pumps, domestic and commercial.</h2>
-      <p>Installation, commissioning, service and repairs, and aftersales maintenance.</p>
-    </div>
-    <div class="svc-grid">
-      <a class="svc svc-feature reveal" href="services.html#installation">
-        {img("installation-outdoor-unit.jpg", "Twin-fan air-to-water heat pump outdoor unit mounted against a wall", 750, 1000)}
-        <div class="svc-feature-body">
-          <h3>Installation</h3>
-          <p>Air-to-water heat pump installation for domestic and commercial systems, through to commissioning and handover.</p>
-        </div>
-      </a>
+    <div class="svc-grid svc-grid-3">
       <a class="svc reveal" href="services.html#commissioning">
         <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
         <h3>Commissioning</h3>
@@ -168,26 +148,38 @@ HOME = f"""
         <h3>Aftersales Maintenance</h3>
         <p>Planned servicing and callouts to keep systems running efficiently year-round.</p>
       </a>
-      <a class="svc reveal" href="maintenance.html">
-        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h3>Annual Maintenance Visit</h3>
-        <p>What your yearly visit includes, and what falls outside it. Shared with every customer before the visit.</p>
-      </a>
     </div>
+  </div>
+</section>
+
+<section class="bg-white">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Services.</h2>
+      <p>Air-to-water heat pumps. Domestic and commercial.</p>
+    </div>
+    <ul class="tick-list issues-list reveal">
+      <li>{TICK}Commissioning &amp; setup (controls, temperatures, checks)</li>
+      <li>{TICK}Performance optimisation &amp; troubleshooting</li>
+      <li>{TICK}Routine / planned maintenance</li>
+      <li>{TICK}Repairs &amp; fault finding (alarms, cycling, low performance)</li>
+      <li>{TICK}Clear reporting &amp; recommendations</li>
+    </ul>
+    <div style="margin-top:30px"><a class="btn btn-ghost" href="services.html">See all services</a></div>
   </div>
 </section>
 
 <section class="bg-pine">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>Common issues.</h2>
-      <p>If any of these sound familiar, get in touch.</p>
+      <h2>Common callouts.</h2>
+      <p>If you're seeing any of these, they're usually fixable with the right checks.</p>
     </div>
     <ul class="tick-list issues-list reveal">{PROB_BLOCKS}</ul>
   </div>
 </section>
 
-<section class="bg-white">
+<section>
   <div class="wrap">
     <div class="sec-head reveal">
       <h2>Recent work.</h2>
@@ -203,9 +195,7 @@ HOME = f"""
   </div>
 </section>
 
-
-
-<section>
+<section class="bg-white">
   <div class="wrap">
     <div class="sec-head reveal">
       <h2>What our customers say.</h2>
@@ -233,31 +223,16 @@ HOME = f"""
   </div>
 </section>
 
-<section id="about" class="about bg-white">
-  <div class="wrap about-grid">
-    <div class="about-media reveal">
-      {img("about-installed-unit.jpg", "A Grant Aerona air-to-water heat pump installed at a home", 750, 1000)}
-    </div>
-    <div class="reveal">
-      <h2>About Irish Air to Water.</h2>
-      <p>Irish Air to Water is run by D&aacute;ire Cullinane, an F-GAS registered heat pump specialist based in Sligo and working across all of Ireland.</p>
-      <p>He holds a QQI Level 6 Advanced Certificate in Refrigeration and Air Conditioning, awarded with Credit, and is trained on Grant R290 air source heat pumps.</p>
-      <div class="sig">D&aacute;ire Cullinane<small>Proprietor, Irish Air to Water</small></div>
-      <div style="margin-top:26px"><a class="btn btn-ghost" href="certifications.html">See our certifications</a></div>
-    </div>
-  </div>
-</section>
-
 <section id="coverage" class="coverage-band" style="padding:64px 0">
   <div class="wrap coverage-band-inner">
     <div class="reveal">
-      <h2>Sligo-based. Covering all of Ireland.</h2>
-      <p>Air-to-water heat pump work across Ireland, for domestic and commercial systems.</p>
+      <h2>Coverage.</h2>
+      <p style="max-width:62ch">Based in Sligo and covering all of Ireland for air-to-water heat pump commissioning, servicing, repairs and aftersales maintenance. Domestic and commercial work welcome. Travel nationwide.</p>
     </div>
     <ul class="tick-list reveal">
-      <li>{TICK}Based in Sligo</li>
-      <li>{TICK}Covering all of Ireland</li>
-      <li>{TICK}Domestic and commercial</li>
+      <li>{TICK}Sligo base</li>
+      <li>{TICK}Ireland-wide</li>
+      <li>{TICK}Domestic &amp; commercial</li>
     </ul>
   </div>
 </section>
@@ -265,7 +240,8 @@ HOME = f"""
 <section class="sec-tight" id="brands">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>Brands we work with.</h2>
+      <h2>Heat pump brands supported.</h2>
+      <p>Experience commissioning, servicing and maintaining a wide range of domestic and commercial air-to-water systems.</p>
     </div>
     <div class="brands-row reveal">{BRANDS_ROW}</div>
   </div>
@@ -274,11 +250,12 @@ HOME = f"""
 <section id="contact" class="contact">
   <div class="wrap contact-grid">
     <div class="reveal">
-      <h2>Get in touch.</h2>
-      <p class="contact-lede">Call, WhatsApp, email or send the form.</p>
+      <h2>Contact.</h2>
+      <p class="contact-lede">Fastest way to book:</p>
       {CONTACT_LIST}
+      <p style="color:rgba(244,243,238,0.7);font-size:0.92rem;margin-top:28px;max-width:48ch">Tip: include your county, system brand/model, and whether it's commissioning or service/maintenance. If there's an alarm, include the code/photo.</p>
     </div>
-    {form_card("Request a callback", "Tell us about your system and we'll come back to you.")}
+    {form_card("Send an enquiry", "")}
   </div>
 </section>
 """
@@ -531,7 +508,7 @@ MAINTENANCE = f"""
       <p class="contact-lede">Call, WhatsApp, email or send the form.</p>
       {CONTACT_LIST}
     </div>
-    {form_card("Book a maintenance visit", "We'll confirm a date and send you this information sheet beforehand.", "Request a visit")}
+    {form_card("Book a maintenance visit", "We share this information sheet with all customers ahead of their visit.", "Send enquiry")}
   </div>
 </section>
 """
@@ -641,11 +618,11 @@ CONTACT = f"""
 <section class="contact" style="padding-top:72px">
   <div class="wrap contact-grid">
     <div class="reveal">
-      <h2>Contact details.</h2>
-      <p class="contact-lede">Air-to-water heat pump installation, commissioning, service and aftersales maintenance.</p>
+      <h2>Fastest way to book.</h2>
       {CONTACT_LIST}
+      <p style="color:rgba(244,243,238,0.7);font-size:0.92rem;margin-top:28px;max-width:48ch">Tip: include your county, system brand/model, and whether it's commissioning or service/maintenance. If there's an alarm, include the code/photo.</p>
     </div>
-    {form_card("Request a callback", "Tell us about your system and we'll come back to you.")}
+    {form_card("Send an enquiry", "")}
   </div>
 </section>
 
