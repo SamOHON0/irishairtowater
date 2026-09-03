@@ -73,6 +73,7 @@ def form_card(heading, sub, submit_label="Send enquiry"):
         <option>Service or repair</option>
         <option>Aftersales maintenance</option>
         <option>Installation</option>
+        <option>Air conditioning</option>
         <option>Something else</option>
       </select>
     </div>
@@ -90,6 +91,23 @@ PROBLEMS = [
     "Noise, alarms, or frequent defrost",
 ]
 PROB_BLOCKS = "".join(f"<li>{TICK}{h}</li>" for h in PROBLEMS)
+
+
+# Air conditioning. Scope wording is Dáire's own, relayed 2 Sep: high wall domestic
+# units, and commercial systems including cassette underceiling and multi-unit VRV/VRF.
+# His QQI Level 6 is in Refrigeration and Air Conditioning, so the credentials carry over.
+AC_DOMESTIC = [
+    "High wall units for homes",
+    "Installation and service",
+    "F-Gas certified refrigerant work",
+]
+AC_COMMERCIAL = [
+    "Cassette and underceiling units",
+    "Multi-unit VRV / VRF systems",
+    "Installation and service",
+]
+AC_DOM_LI = "".join(f"<li>{TICK}{x}</li>" for x in AC_DOMESTIC)
+AC_COM_LI = "".join(f"<li>{TICK}{x}</li>" for x in AC_COMMERCIAL)
 
 COVERAGE_BLOCK = f"""<div class="coverage reveal">
   <h2>Sligo-based. Covering all of Ireland.</h2>
@@ -148,6 +166,11 @@ HOME = f"""
         <h3>Aftersales Maintenance</h3>
         <p>Planned servicing and callouts to keep systems running efficiently year-round.</p>
       </a>
+      <a class="svc reveal" href="services.html#air-conditioning">
+        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg></div>
+        <h3>Air Conditioning</h3>
+        <p>Domestic high wall units and commercial systems, including cassette, underceiling and multi-unit VRV/VRF.</p>
+      </a>
     </div>
   </div>
 </section>
@@ -164,6 +187,7 @@ HOME = f"""
       <li>{TICK}Routine / planned maintenance</li>
       <li>{TICK}Repairs &amp; fault finding (alarms, cycling, low performance)</li>
       <li>{TICK}Clear reporting &amp; recommendations</li>
+      <li>{TICK}Air conditioning: domestic and commercial installation &amp; service</li>
     </ul>
     <div style="margin-top:30px"><a class="btn btn-ghost" href="services.html">See all services</a></div>
   </div>
@@ -345,6 +369,21 @@ SERVICES = f"""
           <li>{TICK}Flow meter adjusted by circuit</li>
           <li>{TICK}More even room temperatures</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="svc-detail-full reveal" id="air-conditioning">
+      <h2>Air conditioning</h2>
+      <p>Installation and service of domestic and commercial air conditioning, alongside our heat pump work. Same F-GAS certified refrigerant handling, and a QQI Level 6 Advanced Certificate in Refrigeration and Air Conditioning behind it.</p>
+      <div class="split-cols" style="margin-top:34px">
+        <div class="panel">
+          <h3>Domestic</h3>
+          <ul class="tick-list">{AC_DOM_LI}</ul>
+        </div>
+        <div class="panel">
+          <h3>Commercial</h3>
+          <ul class="tick-list">{AC_COM_LI}</ul>
+        </div>
       </div>
     </div>
 
@@ -679,13 +718,13 @@ NOT_FOUND = f"""
 # ============================================================ BUILD
 if __name__ == "__main__":
     page("index.html",
-         "Heat Pump Installation & Service, Sligo | Irish Air to Water",
-         "Air-to-water heat pump specialist. Installation, commissioning, service and aftersales maintenance. F-GAS registered, Sligo-based, covering all of Ireland.",
+         "Heat Pump & Air Conditioning Specialist, Sligo | Irish Air to Water",
+         "Air-to-water heat pump commissioning, service and maintenance, plus domestic and commercial air conditioning. F-GAS registered, Sligo-based, all of Ireland.",
          HOME)
 
     page("services.html",
-         "Heat Pump Services, Sligo & Nationwide | Irish Air to Water",
-         "Air-to-water heat pump installation, commissioning, service and repairs, and aftersales maintenance. Domestic and commercial, Sligo-based, all of Ireland.",
+         "Heat Pump & Air Conditioning Services, Sligo | Irish Air to Water",
+         "Air-to-water heat pump commissioning, service and repairs, aftersales maintenance, and air conditioning installation. Domestic and commercial, all of Ireland.",
          SERVICES)
 
     page("maintenance.html",

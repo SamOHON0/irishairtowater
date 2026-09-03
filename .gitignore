@@ -6,6 +6,8 @@ node_modules/
 # Generator scratch
 __pycache__/
 _shots/
+_frames/
+_contact/
 *.pyc
 
 # Raw client media dumps - keep out of the deploy
@@ -13,3 +15,8 @@ _shots/
 !media/*.mp4
 WhatsApp Image*
 WhatsApp Video*
+
+# Client certificates and personal documents - never publish these
+Daire_Cullinane*
+Manual Handling Certificate*
+*.pdf

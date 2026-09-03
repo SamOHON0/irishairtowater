@@ -89,6 +89,7 @@ FOOTER = f"""<footer>
           <li><a href="services.html#repairs">Service &amp; repairs</a></li>
           <li><a href="services.html#aftersales">Aftersales maintenance</a></li>
           <li><a href="services.html#balancing">Hydraulic balancing</a></li>
+          <li><a href="services.html#air-conditioning">Air conditioning</a></li>
         </ul>
       </div>
       <div>
@@ -123,7 +124,7 @@ FOOTER = f"""<footer>
 CTA_BAND = f"""<section class="cta-band">
   <div class="wrap cta-inner">
     <div>
-      <h2>Talk to us about your heat pump.</h2>
+      <h2>Talk to us about your system.</h2>
       <p>Call, WhatsApp, email or send the form.</p>
     </div>
     <div class="cta-actions">
@@ -139,7 +140,7 @@ LOCAL_BUSINESS = {
     "@type": "HVACBusiness",
     "@id": f"{SITE}/#business",
     "name": "Irish Air to Water",
-    "description": "Air-to-water heat pump specialist. Installation, commissioning, service and repairs, and aftersales maintenance. F-GAS registered, Sligo-based, covering all of Ireland.",
+    "description": "Air-to-water heat pump specialist and air conditioning installer. Commissioning, service and repairs, aftersales maintenance, and domestic and commercial air conditioning. F-GAS registered, Sligo-based, covering all of Ireland.",
     "url": SITE,
     "telephone": "+353 87 341 3114",
     "email": EMAIL,
@@ -147,10 +148,16 @@ LOCAL_BUSINESS = {
     "address": {"@type": "PostalAddress", "addressLocality": "Sligo", "addressRegion": "County Sligo", "addressCountry": "IE"},
     "areaServed": {"@type": "Country", "name": "Ireland"},
     "sameAs": ["https://www.instagram.com/irish_airtowater"],
-    "knowsAbout": ["Air to water heat pumps", "F-Gas refrigerant handling", "Heat pump commissioning", "Hydraulic balancing", "R290 propane heat pumps"],
+    "knowsAbout": ["Air to water heat pumps", "F-Gas refrigerant handling", "Heat pump commissioning",
+                   "Hydraulic balancing", "R290 propane heat pumps", "Air conditioning installation",
+                   "Cassette and underceiling air conditioning", "VRV and VRF systems"],
     "makesOffer": [
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": n}}
-        for n in ["Heat pump installation", "Heat pump commissioning", "Heat pump service and repairs", "Aftersales maintenance", "Annual maintenance visit", "Hydraulic balancing"]
+        for n in ["Heat pump installation", "Heat pump commissioning", "Heat pump service and repairs",
+                  "Aftersales maintenance", "Annual maintenance visit", "Hydraulic balancing",
+                  "Domestic air conditioning installation and service",
+                  "Commercial air conditioning installation and service",
+                  "VRV and VRF multi-unit air conditioning systems"]
     ],
     "hasCredential": [
         {"@type": "EducationalOccupationalCredential", "name": "F-Gas Registered"},
