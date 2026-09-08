@@ -91,17 +91,47 @@
   }
 
   /* ---------- Contact forms ----------
-     Placeholder handler. Wire to Formspree / Vercel function / email
-     endpoint before go-live. */
+     If the form has an action (set FORM_ACTION in build.py), submit it
+     in the background and show the result. Without one, this is the
+     pre-launch placeholder that only pretends to send. */
   document.querySelectorAll('form[data-iatw-form]').forEach(function (form) {
+    var btn = form.querySelector('button[type="submit"]');
+    var original = btn ? btn.textContent : '';
+
+    var lock = function (label) {
+      if (!btn) return;
+      btn.textContent = label;
+      btn.disabled = true;
+      form.querySelectorAll('input, select, textarea').forEach(function (f) { f.disabled = true; });
+    };
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var btn = form.querySelector('button[type="submit"]');
-      if (!btn) return;
-      btn.textContent = 'Sent. We will be in touch.';
-      btn.disabled = true;
-      form.querySelectorAll('input, select, textarea').forEach(function (f) {
-        f.disabled = true;
+      /* honeypot: bots fill every field, people never see this one */
+      var trap = form.querySelector('input[name="website"]');
+      if (trap && trap.value) { lock('Sent. We will be in touch.'); return; }
+
+      var action = form.getAttribute('action');
+      if (!action) { lock('Sent. We will be in touch.'); return; }
+
+      if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+      fetch(action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (r) {
+        if (r.ok) { lock('Sent. We will be in touch.'); return; }
+        throw new Error('bad status');
+      }).catch(function () {
+        if (btn) { btn.textContent = original; btn.disabled = false; }
+        var note = form.querySelector('.form-error');
+        if (!note) {
+          note = document.createElement('p');
+          note.className = 'form-error';
+          note.setAttribute('role', 'alert');
+          form.appendChild(note);
+        }
+        note.textContent = 'That did not send. Please call or WhatsApp 087 341 3114.';
       });
     });
   });

@@ -12,6 +12,7 @@
   --white: #fdfdfb;
   --amber: #e8a33d;
   --amber-deep: #c9871f;
+  --amber-text: #8f5d10; /* amber for text on light: 5.5:1 on white */
   --text: #2b3a34;
   --text-soft: #5c6b64;
   --line: rgba(16, 35, 28, 0.12);
@@ -33,6 +34,7 @@ body {
 }
 h1, h2, h3, h4 { font-family: 'Sora', sans-serif; color: var(--ink); }
 img { max-width: 100%; display: block; }
+picture { display: contents; } /* WebP wrapper must not interfere with frame sizing */
 a { color: inherit; }
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 .wrap-narrow { max-width: 860px; margin: 0 auto; padding: 0 24px; }
@@ -252,7 +254,7 @@ header {
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
 }
-.mobile-panel a[aria-current="page"] { color: var(--amber-deep); }
+.mobile-panel a[aria-current="page"] { color: var(--amber-text); }
 .mobile-actions { display: grid; gap: 10px; }
 .mobile-actions .btn { justify-content: center; }
 
@@ -359,7 +361,7 @@ header {
   color: var(--amber);
   margin-bottom: 16px;
 }
-.eyebrow-dark { color: var(--amber-deep); }
+.eyebrow-dark { color: var(--amber-text); }
 .crumbs {
   list-style: none;
   display: flex;
@@ -440,7 +442,7 @@ section { padding: 92px 0; }
   font-family: 'Sora', sans-serif;
   font-weight: 600;
   font-size: 0.85rem;
-  color: var(--amber-deep);
+  color: var(--amber-text);
   margin-top: 6px;
 }
 .svc-feature {
@@ -542,6 +544,29 @@ section { padding: 92px 0; }
 @media (max-width: 600px) { .issues-list { grid-template-columns: 1fr; } }
 
 /* ---------- Brands ---------- */
+/* services.html: each block heads to its own page */
+.svc-detail-media > a { display: block; text-decoration: none; }
+.svc-detail h2 a, .svc-detail-full h2 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.svc-detail h2 a:hover, .svc-detail-full h2 a:hover { color: var(--amber-text); }
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--amber-text);
+  text-decoration: none;
+}
+.more-link svg { width: 17px; height: 17px; flex-shrink: 0; transition: transform 0.2s; }
+.more-link:hover svg { transform: translateX(4px); }
+.more-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
 /* Cross-links between service pages */
 .related-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .related-row a {
@@ -597,7 +622,7 @@ section { padding: 92px 0; }
   font-weight: 700;
   font-size: 0.78rem;
   letter-spacing: 0.1em;
-  color: var(--amber-deep);
+  color: var(--amber-text);
   margin-bottom: 8px;
 }
 .bg-pine .step-num { color: var(--amber); }
@@ -938,6 +963,8 @@ section { padding: 92px 0; }
 }
 .form-card h3 { font-size: 1.2rem; margin-bottom: 6px; }
 .form-card .form-sub { color: var(--text-soft); font-size: 0.92rem; margin-bottom: 22px; }
+.form-card .form-error { color: #9b2c1f; font-size: 0.92rem; margin-top: 14px; }
+.form-card .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
 .field label { font-weight: 500; font-size: 0.88rem; color: var(--ink); }
 .field input, .field select, .field textarea {
@@ -1011,6 +1038,8 @@ footer { background: var(--ink); color: rgba(244, 243, 238, 0.65); padding: 56px
   font-size: 0.82rem;
   color: rgba(244, 243, 238, 0.5);
 }
+.foot-bottom a { color: rgba(244, 243, 238, 0.7); }
+.foot-bottom a:hover { color: var(--amber); }
 
 /* ---------- WhatsApp float ---------- */
 .wa-float {
@@ -1031,6 +1060,59 @@ footer { background: var(--ink); color: rgba(244, 243, 238, 0.65); padding: 56px
 }
 .wa-float:hover { transform: scale(1.06); }
 .wa-float svg { width: 30px; height: 30px; }
+
+/* ---------- Reviews page ---------- */
+.reviews-page { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start; }
+.reviews-list { display: grid; gap: 18px; }
+.reviews-side { position: sticky; top: 96px; }
+.reviews-side .review-video { aspect-ratio: 9 / 16; }
+.reviews-side-note { margin-top: 16px; font-size: 0.9rem; color: var(--text-soft); text-align: center; }
+@media (max-width: 900px) {
+  .reviews-page { grid-template-columns: 1fr; }
+  .reviews-side { position: static; max-width: 420px; margin: 0 auto; width: 100%; }
+}
+
+/* ---------- FAQ page ---------- */
+.faq-group + .faq-group { margin-top: 48px; }
+.faq-group h2 { font-size: 1.35rem; margin-bottom: 14px; }
+.faq-more { margin-top: 40px; color: var(--text-soft); }
+.faq-more a { color: var(--pine); font-weight: 600; }
+
+/* ---------- Plain text pages (privacy) ---------- */
+.prose h2 { font-size: 1.2rem; margin: 32px 0 10px; }
+.prose h2:first-child { margin-top: 0; }
+.prose p { color: var(--text); margin-bottom: 14px; max-width: 68ch; }
+.prose a { color: var(--pine); font-weight: 500; }
+.prose-note { color: var(--text-soft); font-size: 0.88rem; margin-top: 36px; }
+
+/* ---------- Mobile call bar ----------
+   Phones get a fixed Call / WhatsApp bar instead of the float. */
+.call-bar {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 60;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--pine-deep);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18);
+}
+.call-bar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 16px 12px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--amber);
+}
+.call-bar a.call-bar-wa { color: #fff; background: #1fb85a; }
+.call-bar svg { width: 19px; height: 19px; flex-shrink: 0; }
 
 /* ---------- Reveal animation ----------
    Progressive enhancement: content is only hidden when JS is running,
@@ -1094,4 +1176,7 @@ footer { background: var(--ink); color: rgba(244, 243, 238, 0.65); padding: 56px
   .nav-call span { display: none; }
   .nav-call { padding: 13px 16px; }
   .nav-call svg { width: 19px; height: 19px; }
+  .call-bar { display: grid; }
+  .wa-float { display: none; }
+  body { padding-bottom: 60px; }
 }

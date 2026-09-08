@@ -41,6 +41,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://irishairtowater.com/reviews</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://irishairtowater.com/faq</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://irishairtowater.com/certifications</loc>
     <lastmod>2026-09-08</lastmod>
     <priority>0.7</priority>
@@ -49,5 +59,10 @@
     <loc>https://irishairtowater.com/contact</loc>
     <lastmod>2026-09-08</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://irishairtowater.com/privacy</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

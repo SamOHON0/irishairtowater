@@ -4,7 +4,7 @@ from playwright.async_api import async_playwright
 ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / "_shots"
 OUT.mkdir(exist_ok=True)
-PAGES = ["index", "services", "installation", "commissioning", "repairs",
+PAGES = ["index", "services", "installation", "commissioning", "repairs", "reviews", "faq", "privacy",
          "maintenance", "hydraulic-balancing", "air-conditioning",
          "certifications", "contact", "404"]
 

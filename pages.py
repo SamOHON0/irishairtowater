@@ -17,7 +17,7 @@ from build import (
     PHONE_DISPLAY, PHONE_TEL, PHONE_WA, EMAIL,
     ICON_PHONE, ICON_MAIL, ICON_INSTA, ICON_PIN, TICK, PLUS,
     SERVICE_PAGES, svc_cards, related_services, crumbs,
-    breadcrumb_schema, service_schema, sitemap,
+    breadcrumb_schema, service_schema, sitemap, pic, FORM_ACTION,
 )
 
 SERVICES_TRAIL = [("index.html", "Home"), ("services.html", "Services")]
@@ -53,9 +53,11 @@ CONTACT_LIST = f"""<ul class="contact-list">
 
 def form_card(heading, sub, submit_label="Send enquiry"):
     sub_html = f'\n  <p class="form-sub">{sub}</p>' if sub else ""
+    action = f' action="{FORM_ACTION}" method="POST"' if FORM_ACTION else ""
     return f"""<div class="form-card reveal">
   <h3>{heading}</h3>{sub_html}
-  <form data-iatw-form>
+  <form data-iatw-form{action}>
+    <div class="hp" aria-hidden="true"><label for="f-website">Website</label><input id="f-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
     <div class="field-row">
       <div class="field">
         <label for="f-name">Name</label>
@@ -198,12 +200,12 @@ HOME = f"""
       <h2>Recent work.</h2>
     </div>
     <div class="gallery-grid reveal">
-      <div class="g-item g-tall"><img src="images/coverage-home-install.jpg" alt="Finished Panasonic air-to-water heat pump installation" width="750" height="1000" loading="lazy" decoding="async"></div>
-      <div class="g-item"><img src="images/services-commissioning-controls.jpg" alt="Heat pump control board during commissioning" width="750" height="1000" loading="lazy" decoding="async"></div>
-      <div class="g-item"><img src="images/services-aftersales-filters.jpg" alt="Air filters removed for cleaning on a service visit" width="750" height="1000" loading="lazy" decoding="async"></div>
-      <div class="g-item g-tall"><img src="images/certifications-at-work.jpg" alt="A large system strainer removed for cleaning on a commercial installation" width="750" height="1000" loading="lazy" decoding="async"></div>
-      <div class="g-item"><img src="images/services-installation.jpg" alt="Wall-mounted heat pump unit with pipework" width="562" height="1000" loading="lazy" decoding="async"></div>
-      <div class="g-item"><img src="images/maintenance-clear-access.jpg" alt="Outdoor heat pump unit sited with clear space around it" width="750" height="1000" loading="lazy" decoding="async"></div>
+      <div class="g-item g-tall">{pic("coverage-home-install.jpg", "Finished Panasonic air-to-water heat pump installation", 750, 1000)}</div>
+      <div class="g-item">{pic("services-commissioning-controls.jpg", "Heat pump control board during commissioning", 750, 1000)}</div>
+      <div class="g-item">{pic("services-aftersales-filters.jpg", "Air filters removed for cleaning on a service visit", 750, 1000)}</div>
+      <div class="g-item g-tall">{pic("certifications-at-work.jpg", "A large system strainer removed for cleaning on a commercial installation", 750, 1000)}</div>
+      <div class="g-item">{pic("services-installation.jpg", "Wall-mounted heat pump unit with pipework", 562, 1000)}</div>
+      <div class="g-item">{pic("maintenance-clear-access.jpg", "Outdoor heat pump unit sited with clear space around it", 750, 1000)}</div>
     </div>
   </div>
 </section>
@@ -233,6 +235,7 @@ HOME = f"""
         </video>
       </div>
     </div>
+    <div style="margin-top:30px"><a class="btn btn-ghost" href="reviews.html">Read all reviews</a></div>
   </div>
 </section>
 
@@ -303,6 +306,17 @@ ENQUIRY_TIP = f"""<section class="bg-pine sec-tight">
   </div>
 </section>"""
 
+ARROW = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+         'stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/>'
+         '<path d="m12 5 7 7-7 7"/></svg>')
+
+
+def more_link(href, label):
+    """Keyword-anchored link from a services.html block to its own page."""
+    return f'<a class="more-link" href="{href}">{label}{ARROW}</a>'
+
+
+# Layout is the original stacked one. Each block now heads to its own page.
 SERVICES = f"""
 <section class="page-hero">
   <div class="wrap">
@@ -314,18 +328,100 @@ SERVICES = f"""
 
 <section>
   <div class="wrap">
-    {svc_cards()}
-  </div>
-</section>
 
-<section class="bg-pine">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Common callouts.</h2>
-      <p>If you're seeing any of these, they're usually fixable with the right checks.</p>
+    <div class="svc-detail reveal" id="installation">
+      <div class="svc-detail-media"><a href="installation.html" tabindex="-1" aria-hidden="true">{img("services-installation.jpg", "Wall-mounted heat pump unit with pipework run down the wall", 562, 1000)}</a></div>
+      <div>
+        <h2><a href="installation.html">Installation</a></h2>
+        <p>Installation of domestic and commercial air-to-water heat pump systems, through to commissioning and handover.</p>
+        <ul class="tick-list">
+          <li>{TICK}Siting and mounting of outdoor and indoor units</li>
+          <li>{TICK}Refrigerant pipework: brazing, pressure testing, evacuation and charging</li>
+          <li>{TICK}Hot water cylinder installation</li>
+          <li>{TICK}First-fix and second-fix pipework and electrical connections</li>
+          <li>{TICK}System handover</li>
+        </ul>
+        {more_link("installation.html", "Heat pump installation")}
+      </div>
     </div>
-    <ul class="tick-list issues-list reveal">{PROB_BLOCKS}</ul>
-    <div style="margin-top:30px"><a class="btn btn-amber" href="repairs.html">Service &amp; repairs</a></div>
+
+    <div class="svc-detail flip reveal" id="commissioning">
+      <div class="svc-detail-media"><a href="commissioning.html" tabindex="-1" aria-hidden="true">{img("services-commissioning-controls.jpg", "Heat pump control board and wiring inside an opened control panel", 750, 1000)}</a></div>
+      <div>
+        <h2><a href="commissioning.html">Commissioning</a></h2>
+        <p>Correct setup from day one: checks, settings, optimisation, and clear handover.</p>
+        <ul class="tick-list">
+          <li>{TICK}System checks against manufacturer specification</li>
+          <li>{TICK}Settings and controls configured</li>
+          <li>{TICK}Optimisation of system performance</li>
+          <li>{TICK}Clear handover so you understand your controls</li>
+        </ul>
+        {more_link("commissioning.html", "Heat pump commissioning")}
+      </div>
+    </div>
+
+    <div class="svc-detail reveal" id="repairs">
+      <div class="svc-detail-media"><a href="repairs.html" tabindex="-1" aria-hidden="true">{img("services-repairs-strainer-check.jpg", "A system strainer checked in hand during a service call", 937, 1000)}</a></div>
+      <div>
+        <h2><a href="repairs.html">Service &amp; repairs</a></h2>
+        <p>Fault finding, alarms, cycling issues, DHW temperature problems and performance optimisation.</p>
+        <ul class="tick-list">
+          <li>{TICK}Fault finding and diagnostics</li>
+          <li>{TICK}Alarms and lockouts</li>
+          <li>{TICK}Cycling issues</li>
+          <li>{TICK}DHW temperature problems</li>
+          <li>{TICK}Performance optimisation</li>
+        </ul>
+        {SAFE_NOTE}
+        {more_link("repairs.html", "Heat pump service &amp; repairs")}
+      </div>
+    </div>
+
+    <div class="svc-detail flip reveal" id="aftersales">
+      <div class="svc-detail-media"><a href="maintenance.html" tabindex="-1" aria-hidden="true">{img("services-aftersales-filters.jpg", "Air filters removed and laid out for cleaning during a service visit", 750, 1000)}</a></div>
+      <div>
+        <h2><a href="maintenance.html">Aftersales maintenance</a></h2>
+        <p>Planned servicing and callouts to keep systems running efficiently year-round.</p>
+        <ul class="tick-list">
+          <li>{TICK}Annual maintenance visit, carried out by an F-Gas certified engineer</li>
+          <li>{TICK}F-Gas leak check, recorded as required under F-Gas Regulations</li>
+          <li>{TICK}Written service record of what was checked and any issues found</li>
+          <li>{TICK}Callouts between scheduled visits</li>
+        </ul>
+        {more_link("maintenance.html", "Annual maintenance visit")}
+      </div>
+    </div>
+
+    <div class="svc-detail reveal" id="balancing">
+      <div class="svc-detail-media"><a href="hydraulic-balancing.html" tabindex="-1" aria-hidden="true">{img("services-balancing-manifold.jpg", "Heating manifold with flow meters, from our hydraulic balancing explainer", 1000, 514, cls="frame-landscape")}</a></div>
+      <div>
+        <h2><a href="hydraulic-balancing.html">Hydraulic balancing</a></h2>
+        <p>Sometimes the heat source is not the problem. Short loops get too much flow and long loops get too little, so one room runs warm while another sits cool.</p>
+        <ul class="tick-list">
+          <li>{TICK}Uneven flow distribution identified</li>
+          <li>{TICK}Flow meter adjusted by circuit</li>
+          <li>{TICK}More even room temperatures</li>
+        </ul>
+        {more_link("hydraulic-balancing.html", "Hydraulic balancing")}
+      </div>
+    </div>
+
+    <div class="svc-detail-full reveal" id="air-conditioning">
+      <h2><a href="air-conditioning.html">Air conditioning</a></h2>
+      <p>Installation and service of domestic and commercial air conditioning, alongside our heat pump work. Same F-GAS certified refrigerant handling, and a QQI Level 6 Advanced Certificate in Refrigeration and Air Conditioning behind it.</p>
+      <div class="split-cols" style="margin-top:34px">
+        <div class="panel">
+          <h3>Domestic</h3>
+          <ul class="tick-list">{AC_DOM_LI}</ul>
+        </div>
+        <div class="panel">
+          <h3>Commercial</h3>
+          <ul class="tick-list">{AC_COM_LI}</ul>
+        </div>
+      </div>
+      <div style="margin-top:28px">{more_link("air-conditioning.html", "Air conditioning installation &amp; service")}</div>
+    </div>
+
   </div>
 </section>
 
@@ -780,25 +876,25 @@ CERTS = [
     {
         "title": "QQI Level 6 Advanced Certificate",
         "desc": "Craft - Refrigeration and Air Conditioning, awarded with Credit by Quality and Qualifications Ireland.",
-        "media": '<div class="doc-frame"><img src="images/cert-qqi.jpg" alt="QQI Level 6 Advanced Certificate awarded to Daire Cullinane" width="525" height="700" loading="lazy" decoding="async"></div>',
+        "media": f'<div class="doc-frame">{pic("cert-qqi.jpg", "QQI Level 6 Advanced Certificate awarded to Daire Cullinane", 525, 700)}</div>',
         "meta": [("Awarded", "14 June 2020, with Credit"), ("Level", "NFQ Level 6 / EQF Level 5")],
     },
     {
         "title": "Grant Aerona R290 Course",
         "desc": "One-day workshop on product knowledge and best practice for installing Grant R290 air source heat pumps and their associated system components.",
-        "media": '<div class="doc-frame"><img src="images/cert-r290.jpg" alt="Grant Aerona R290 course certificate" width="700" height="496" loading="lazy" decoding="async"></div>',
+        "media": f'<div class="doc-frame">{pic("cert-r290.jpg", "Grant Aerona R290 course certificate", 700, 496)}</div>',
         "meta": [("Attended", "30 October 2025"), ("Provider", "Grant, grant.ie")],
     },
     {
         "title": "Manual Handling",
         "desc": "Manual handling training, as referenced in the company Safety Statement's control measures for lifting heat pump units, cylinders, gas bottles and equipment.",
-        "media": '<div class="doc-frame"><img src="images/cert-manual-handling.jpg" alt="Manual handling certificate" width="660" height="510" loading="lazy" decoding="async"></div>',
+        "media": f'<div class="doc-frame">{pic("cert-manual-handling.jpg", "Manual handling certificate", 660, 510)}</div>',
         "meta": [("Issued", "11 March 2025"), ("Valid to", "11 March 2028"), ("Certificate no.", "CERT603373")],
     },
     {
         "title": "Company Safety Statement",
         "desc": "Prepared under Section 20 of the Safety, Health and Welfare at Work Act 2005. Sets out the company's general safety policy, responsibilities, hazard identification, control measures, emergency procedures, training and competency arrangements and insurance-related safety controls.",
-        "media": '<div class="doc-frame"><img src="images/cert-safety-statement.jpg" alt="Irish Air to Water Safety Statement cover page" width="496" height="700" loading="lazy" decoding="async"></div>',
+        "media": f'<div class="doc-frame">{pic("cert-safety-statement.jpg", "Irish Air to Water Safety Statement cover page", 496, 700)}</div>',
         "meta": [("Issued", "6 August 2026"), ("Review date", "6 August 2027"), ("Provided to", "Main contractors, mechanical contractors and other parties on request")],
     },
     {
@@ -824,7 +920,7 @@ CERTIFICATIONS = f"""
   <div class="wrap">
     <h1>Certified, registered and insured.</h1>
     <p>Documentation is available to homeowners, main contractors and mechanical contractors on request.</p>
-    <ul class="crumbs"><li><a href="index.html">Home</a></li><li>Certifications</li></ul>
+    {crumbs([("index.html", "Home"), (None, "Certifications")])}
   </div>
 </section>
 
@@ -866,7 +962,7 @@ CONTACT = f"""
   <div class="wrap">
     <h1>Get in touch.</h1>
     <p>Call, WhatsApp, email or send the form. Sligo-based, covering all of Ireland, domestic and commercial.</p>
-    <ul class="crumbs"><li><a href="index.html">Home</a></li><li>Contact</li></ul>
+    {crumbs([("index.html", "Home"), (None, "Contact")])}
   </div>
 </section>
 
@@ -887,6 +983,170 @@ CONTACT = f"""
     <div class="coverage-media reveal">
       {img("contact-coverage-grant-unit.jpg", "Grant air-to-water heat pump outdoor unit at a domestic property", 750, 1000)}
     </div>
+  </div>
+</section>
+"""
+
+
+# ============================================================ REVIEWS
+# All five are real Facebook recommendations transcribed from the promo video
+# Dáire supplied. Customers' own wording; the three on the home page are trimmed,
+# these are the fuller versions. No review schema: self-serving reviews on a
+# LocalBusiness are against Google's guidelines, so they stay visual only.
+REVIEWS = [
+    ("Stephanie Callaghan",
+     "He was absolutely fantastic from start to finish. He explained everything clearly, was very professional, and his pricing was extremely reasonable. It&rsquo;s such a relief to find someone so reliable, honest, and helpful."),
+    ("R&oacute;is&iacute;n Mc Gloin",
+     "I would highly recommend D&aacute;ire! I contacted him about servicing my heat pump system, and he got back to me straight away, arranging a service visit for the very next day. From start to finish, he was professional, reliable, and incredibly helpful. I had issues with my SATs, and he took the time to resolve the problem, explain everything clearly, and give me a better understanding of how the system works. Great service and excellent communication. I wouldn&rsquo;t hesitate to recommend him to anyone."),
+    ("Shawana Moriarty",
+     "Absolutely 10/10 service. Knew what the problem was straight away and got it sorted. I&rsquo;ve had 5 people come to look at the problem and only he knew. Recommend 100%."),
+    ("Niamh Clancy",
+     "I would highly recommend Daire! He took the time out of his evening to check everything was working properly for me in my home and also showed me how to use the system correctly as I was never shown previously. Genuine person, great price and very very helpful!!"),
+    ("Rebecca Fabozzi",
+     "We have been having extremely high bills because of our heat pump and no knowledge as to why. Since he has looked at it, our usage on the pump has come down and our bills reduced."),
+]
+
+REVIEW_CARDS = "".join(
+    f'<div class="review reveal"><blockquote>&ldquo;{text}&rdquo;</blockquote>'
+    f'<div class="review-who">{name}<small>Facebook review</small></div></div>'
+    for name, text in REVIEWS
+)
+
+REVIEWS_PAGE = f"""
+<section class="page-hero">
+  <div class="wrap">
+    <h1>What our customers say.</h1>
+    <p>Recommendations from the Irish Air to Water Facebook page, in the customers' own words.</p>
+    {crumbs([("index.html", "Home"), (None, "Reviews")])}
+  </div>
+</section>
+
+<section>
+  <div class="wrap reviews-page">
+    <div class="reviews-list">{REVIEW_CARDS}</div>
+    <div class="reviews-side">
+      <div class="review-video reveal">
+        <video controls playsinline preload="none" poster="media/customer-reviews-poster.jpg" aria-label="Customer reviews from the Irish Air to Water Facebook page">
+          <source src="media/customer-reviews.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="reviews-side-note">Follow us on Instagram at <a href="https://www.instagram.com/irish_airtowater" target="_blank" rel="noopener">@irish_airtowater</a>.</p>
+    </div>
+  </div>
+</section>
+
+{CTA_BAND}
+"""
+
+
+# ============================================================ FAQ
+# Every answer traces to his site, the maintenance PDF, the Safety Statement,
+# his LinkedIn balancing graphic, or his relayed air conditioning scope.
+GENERAL_FAQS = [
+    ("What areas do you cover?",
+     ["We are based in Sligo and cover all of Ireland, for both domestic and commercial systems."]),
+    ("Which heat pump brands do you work on?",
+     ["MasterTherm, Mitsubishi Electric, Mitsubishi Heavy Industries, Panasonic and Samsung. We have experience commissioning, servicing and maintaining a wide range of domestic and commercial air-to-water systems."]),
+    ("Do you install heat pumps, or only service them?",
+     ["Both. We install domestic and commercial air-to-water heat pump systems through to commissioning and handover: siting and mounting of outdoor and indoor units, refrigerant pipework, hot water cylinder installation, first-fix and second-fix pipework and electrical connections, and system handover."]),
+    ("Do you do air conditioning?",
+     ["Yes. Installation and service of high wall domestic air conditioners, and of commercial systems including cassette and underceiling units and multi-unit VRV/VRF systems."]),
+    ("Are you F-Gas registered?",
+     ["Yes. Under F-Gas Regulations, only personnel holding a valid F-Gas personal certificate may work on a refrigerant circuit. Refrigerant is recovered using certified recovery equipment and is never vented to atmosphere."]),
+    ("Do you work on gas boilers?",
+     ["No. Gas boiler and gas appliance work is separate to heat pump maintenance and outside our scope."]),
+]
+
+CALLING_FAQS = [
+    ("What should I include when I get in touch?",
+     ["Your county, the system brand and model, and whether it's commissioning or service and maintenance. If there's an alarm, include the code or a photo of the display."]),
+    ("What are the most common problems you get called out for?",
+     ["High electricity bills or low efficiency, the heat pump cycling on and off, hot water not reaching temperature, cold rooms or poor heat output, and noise, alarms or frequent defrost. If you're seeing any of these, they're usually fixable with the right checks."]),
+    ("One room is warm and another is cold. Is the heat pump faulty?",
+     ["Not necessarily. Sometimes the heat source is not the problem. Short loops get too much flow and long loops get too little, so one room runs warm while another sits cool. Hydraulic balancing identifies the uneven flow distribution and adjusts the flow meter circuit by circuit for more even room temperatures."]),
+]
+
+MAINT_MORE_FAQS = [
+    ("What isn't covered by maintenance?",
+     ["Maintenance doesn't cover damage from misuse, unauthorised modification, power surges, frost damage from the system being left switched off, or storm, flood or lightning damage. These would be treated as chargeable repair work."]),
+    ("What if I need to cancel a visit?",
+     ["Please give at least 24 hours' notice. A call-out charge applies if we attend and cannot gain access, or if the visit is cancelled with less than 24 hours' notice."]),
+]
+
+CONTRACTOR_FAQS = [
+    ("Can you provide a Safety Statement or RAMS?",
+     ["Our company Safety Statement, prepared under Section 20 of the Safety, Health and Welfare at Work Act 2005, is provided to main contractors, mechanical contractors and other parties on request. It is a general company document and does not replace RAMS, method statements, permits-to-work or site inductions, which are prepared separately where required."]),
+    ("How do you work on multi-trade sites?",
+     ["A site briefing or induction is completed on arrival. F-Gas certification is checked before work commences, and safe isolation (isolate, lock off, prove dead) is followed before any electrical work. Electrical installation work is carried out in accordance with the National Rules for Electrical Installations (I.S. 10101); where the scope requires a Registered Electrical Contractor, this is arranged and coordinated."]),
+]
+
+FAQ_GROUPS = [
+    ("General", GENERAL_FAQS),
+    ("Getting in touch", CALLING_FAQS),
+    ("Annual maintenance", MAINT_FAQS + MAINT_MORE_FAQS),
+    ("For contractors", CONTRACTOR_FAQS),
+]
+
+_faq_html = ""
+_n = 1
+for _title, _items in FAQ_GROUPS:
+    _faq_html += f'<div class="faq-group reveal"><h2>{_title}</h2>{faq_block(_items, start=_n)}</div>'
+    _n += len(_items)
+ALL_FAQS = [q for _t, items in FAQ_GROUPS for q in items]
+
+FAQ_PAGE = f"""
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Frequently asked questions.</h1>
+    <p>Coverage, brands, what to send us, what a maintenance visit covers, and what contractors need to know.</p>
+    {crumbs([("index.html", "Home"), (None, "FAQ")])}
+  </div>
+</section>
+
+<section>
+  <div class="wrap-narrow">
+    {_faq_html}
+    <p class="faq-more">Something else? <a href="contact.html">Get in touch</a> or call <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>
+  </div>
+</section>
+
+{CTA_BAND}
+"""
+
+
+# ============================================================ PRIVACY
+# Plain statement of what the site actually collects. To be checked by Dáire.
+PRIVACY = f"""
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Privacy.</h1>
+    <p>What this website collects, why, and how to contact us about it.</p>
+    {crumbs([("index.html", "Home"), (None, "Privacy")])}
+  </div>
+</section>
+
+<section>
+  <div class="wrap-narrow prose">
+    <h2>Who we are</h2>
+    <p>Irish Air to Water is a heat pump and air conditioning business based in Sligo, Ireland. The proprietor is D&aacute;ire Cullinane. You can reach us at <a href="mailto:{EMAIL}">{EMAIL}</a> or <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>.</p>
+
+    <h2>What we collect</h2>
+    <p>If you send an enquiry through the form on this site, we receive what you type: your name, phone number, county, heat pump brand or model, and the type of work you need. We use it to respond to your enquiry and, if you become a customer, to arrange and carry out the work. We do not use it for marketing and we do not sell or share it with anyone else.</p>
+    <p>If you call, WhatsApp or email us, we hold your contact details and the content of your message for the same purpose.</p>
+
+    <h2>Cookies and analytics</h2>
+    <p>This site does not set cookies and does not run analytics or advertising scripts.</p>
+
+    <h2>Third parties</h2>
+    <p>The site is hosted on Vercel. Fonts are loaded from Google Fonts, which means your browser requests the font files from Google's servers when you visit. Form submissions are delivered to us by email. WhatsApp links open WhatsApp, which has its own privacy policy.</p>
+
+    <h2>How long we keep it</h2>
+    <p>Enquiry details are kept for as long as needed to respond and, for customers, for as long as we maintain the system and as required for tax and legal records.</p>
+
+    <h2>Your rights</h2>
+    <p>Under the GDPR you can ask what personal data we hold about you, ask for it to be corrected or deleted, or object to our use of it. Email <a href="mailto:{EMAIL}">{EMAIL}</a>. If you are not satisfied with our response you can contact the Data Protection Commission at <a href="https://www.dataprotection.ie" target="_blank" rel="noopener">dataprotection.ie</a>.</p>
+
+    <p class="prose-note">Last updated September 2026.</p>
   </div>
 </section>
 """
@@ -931,7 +1191,8 @@ if __name__ == "__main__":
     page("index.html",
          "Heat Pump & Air Conditioning Specialist, Sligo | Irish Air to Water",
          "Air-to-water heat pump commissioning, service and maintenance, plus domestic and commercial air conditioning. F-GAS registered, Sligo-based, all of Ireland.",
-         HOME)
+         HOME,
+         head_extra='<link rel="preload" as="image" href="media/brand-intro-poster.jpg" fetchpriority="high">\n')
 
     page("services.html",
          "Heat Pump & Air Conditioning Services, Sligo | Irish Air to Water",
@@ -1009,7 +1270,27 @@ if __name__ == "__main__":
     page("certifications.html",
          "Certifications & Insurance | Irish Air to Water",
          "F-GAS registered, QQI Level 6 in Refrigeration and Air Conditioning, Grant R290 trained, Safety Statement and Combined Liability insurance.",
-         CERTIFICATIONS)
+         CERTIFICATIONS,
+         extra_schema=[breadcrumb_schema([("index.html", "Home"), (None, "Certifications")])])
+
+    page("reviews.html",
+         "Customer Reviews | Irish Air to Water",
+         "Real recommendations from the Irish Air to Water Facebook page: heat pump servicing, repairs and clear explanations, in the customers' own words.",
+         REVIEWS_PAGE,
+         extra_schema=[breadcrumb_schema([("index.html", "Home"), (None, "Reviews")])])
+
+    page("faq.html",
+         "Heat Pump FAQ | Irish Air to Water, Sligo",
+         "Coverage, brands, what to send when you get in touch, what an annual maintenance visit covers, and what contractors need. Straight answers from Irish Air to Water.",
+         FAQ_PAGE,
+         extra_schema=[faq_schema(ALL_FAQS),
+                       breadcrumb_schema([("index.html", "Home"), (None, "FAQ")])])
+
+    page("privacy.html",
+         "Privacy | Irish Air to Water",
+         "What the Irish Air to Water website collects when you send an enquiry, why, and how to contact us about your data.",
+         PRIVACY,
+         extra_schema=[breadcrumb_schema([("index.html", "Home"), (None, "Privacy")])])
 
     page("404.html",
          "Page not found | Irish Air to Water",
@@ -1019,7 +1300,8 @@ if __name__ == "__main__":
     page("contact.html",
          "Contact | Irish Air to Water Heat Pump Specialists, Sligo",
          "Call 087 341 3114, WhatsApp or email. Air-to-water heat pump installation, commissioning, service and repairs. Sligo-based, covering all of Ireland.",
-         CONTACT)
+         CONTACT,
+         extra_schema=[breadcrumb_schema([("index.html", "Home"), (None, "Contact")])])
 
     sitemap([
         ("index.html", "1.0"),
@@ -1030,6 +1312,9 @@ if __name__ == "__main__":
         ("maintenance.html", "0.8"),
         ("hydraulic-balancing.html", "0.7"),
         ("air-conditioning.html", "0.8"),
+        ("reviews.html", "0.7"),
+        ("faq.html", "0.7"),
         ("certifications.html", "0.7"),
         ("contact.html", "0.8"),
+        ("privacy.html", "0.3"),
     ])

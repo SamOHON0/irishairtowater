@@ -120,13 +120,28 @@ PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=
 ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 0 1 6.988 2.896 9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.142 1.595 5.945L0 24l6.335-1.652a12 12 0 0 0 5.71 1.447h.006c6.585 0 11.946-5.335 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411"/></svg>'
 
 
+# Where the enquiry forms post. None keeps the in-page placeholder handler.
+# Set to a Formspree endpoint ("https://formspree.io/f/xxxxxxxx") to go live.
+FORM_ACTION = None
+
+
+def pic(src, alt, w, h, eager=False, img_cls=""):
+    """<picture> with a WebP source and the original JPEG as fallback.
+    A .webp sibling is emitted by the image pass; if none exists, plain <img>."""
+    load = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
+    cls = f' class="{img_cls}"' if img_cls else ""
+    fallback = (f'<img{cls} src="images/{src}" alt="{alt}" '
+                f'width="{w}" height="{h}" {load} decoding="async">')
+    webp = pathlib.Path(src).with_suffix(".webp")
+    if not (OUT / "images" / webp).exists():
+        return fallback
+    return f'<picture><source srcset="images/{webp}" type="image/webp">{fallback}</picture>'
+
+
 def img(src, alt, w, h, eager=False, cls=""):
     """Photo in a cropping frame. All supplied photos are 3:4 portrait."""
-    load = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
     extra = f" {cls}" if cls else ""
-    return (f'<div class="media-frame{extra}">'
-            f'<img class="media-img" src="images/{src}" alt="{alt}" '
-            f'width="{w}" height="{h}" {load} decoding="async"></div>')
+    return f'<div class="media-frame{extra}">{pic(src, alt, w, h, eager, "media-img")}</div>'
 
 
 CURRENT_ATTR = ' aria-current="page"' 
@@ -190,6 +205,8 @@ FOOTER = f"""<footer>
         <ul>
           <li><a href="services.html">All services</a></li>
           <li><a href="certifications.html">Certifications</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="faq.html">FAQ</a></li>
           <li><a href="index.html#coverage">Coverage</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -205,12 +222,16 @@ FOOTER = f"""<footer>
       </div>
     </div>
     <div class="foot-bottom">
-      <div>&copy; 2026 Irish Air to Water. Proprietor: D&aacute;ire Cullinane. Sligo, Ireland.</div>
+      <div>&copy; 2026 Irish Air to Water. Proprietor: D&aacute;ire Cullinane. Sligo, Ireland. <a href="privacy.html">Privacy</a></div>
       <div>Site by <a href="https://squaretwo.ie" target="_blank" rel="noopener" style="text-decoration:none">SquareTwo</a></div>
     </div>
   </div>
 </footer>
 <a class="wa-float" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">{ICON_WA}</a>
+<nav class="call-bar" aria-label="Call or message">
+  <a href="tel:{PHONE_TEL}">{ICON_PHONE}Call {PHONE_DISPLAY}</a>
+  <a class="call-bar-wa" href="https://wa.me/{PHONE_WA}" target="_blank" rel="noopener">{ICON_WA}WhatsApp</a>
+</nav>
 <script src="assets/main.js?v=__MAINJS_V__"></script>"""
 
 
@@ -265,7 +286,7 @@ def _asset_v(relpath):
     return hashlib.md5((OUT / relpath).read_bytes()).hexdigest()[:8]
 
 
-def page(filename, title, description, body, extra_schema=None, og_type="website"):
+def page(filename, title, description, body, extra_schema=None, og_type="website", head_extra=""):
     schema = [LOCAL_BUSINESS]
     if extra_schema:
         schema.extend(extra_schema if isinstance(extra_schema, list) else [extra_schema])
@@ -302,7 +323,7 @@ def page(filename, title, description, body, extra_schema=None, og_type="website
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css?v={_asset_v('assets/styles.css')}">
-{schema_tags}
+{head_extra}{schema_tags}
 </head>
 <body>
 {header(filename)}
