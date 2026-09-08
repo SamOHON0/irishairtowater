@@ -244,7 +244,7 @@ header {
 }
 .mobile-panel.open { display: block; }
 .mobile-panel ul { list-style: none; display: grid; gap: 2px; margin-bottom: 18px; }
-.mobile-panel a {
+.mobile-panel ul a {
   display: block;
   text-decoration: none;
   font-family: 'Sora', sans-serif;
@@ -254,9 +254,9 @@ header {
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
 }
-.mobile-panel a[aria-current="page"] { color: var(--amber-text); }
+.mobile-panel ul a[aria-current="page"] { color: var(--amber-text); }
 .mobile-actions { display: grid; gap: 10px; }
-.mobile-actions .btn { justify-content: center; }
+.mobile-actions .btn { display: flex; justify-content: center; width: 100%; }
 
 /* ---------- Hero ---------- */
 .hero { background: var(--pine-deep); color: var(--bone); overflow: hidden; }
