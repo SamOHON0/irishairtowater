@@ -19,6 +19,99 @@ NAV = [
 ]
 
 ICON_PHONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'
+
+# Lucide icon paths, used as the faded watermark on service cards.
+def _svg(paths):
+    return ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+            'stroke-linecap="round" stroke-linejoin="round">' + paths + '</svg>')
+
+ICON_WRENCH = _svg('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>')
+ICON_GAUGE = _svg('<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>')
+ICON_SEARCH = _svg('<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>')
+ICON_CALCHECK = _svg('<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/>')
+ICON_SLIDERS = _svg('<line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/>')
+ICON_SNOW = _svg('<path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/>')
+
+# One page per service. (file, nav/card label, card blurb, schema service name, icon)
+SERVICE_PAGES = [
+    ("installation.html", "Installation",
+     "Domestic and commercial air-to-water systems, from siting and pipework through to handover.",
+     "Air to water heat pump installation", ICON_WRENCH),
+    ("commissioning.html", "Commissioning",
+     "Correct setup from day one: checks, settings, optimisation, and clear handover.",
+     "Air to water heat pump commissioning", ICON_GAUGE),
+    ("repairs.html", "Service &amp; Repairs",
+     "Fault finding, alarms, cycling issues, DHW temperature problems and performance optimisation.",
+     "Air to water heat pump service and repairs", ICON_SEARCH),
+    ("maintenance.html", "Aftersales Maintenance",
+     "Planned annual servicing and callouts to keep systems running efficiently year-round.",
+     "Heat pump aftersales maintenance", ICON_CALCHECK),
+    ("hydraulic-balancing.html", "Hydraulic Balancing",
+     "Uneven flow leaves one room warm and another cool. Balancing evens the flow out by circuit.",
+     "Heating system hydraulic balancing", ICON_SLIDERS),
+    ("air-conditioning.html", "Air Conditioning",
+     "Domestic high wall units and commercial systems, including cassette, underceiling and multi-unit VRV/VRF.",
+     "Air conditioning installation and service", ICON_SNOW),
+]
+
+
+def svc_cards(exclude=None, grid_cls="svc-grid"):
+    """Grid of service cards. Pass a filename to leave that service out."""
+    cards = ""
+    for href, label, blurb, _name, icon in SERVICE_PAGES:
+        if href == exclude:
+            continue
+        cards += (f'<a class="svc reveal" href="{href}">'
+                  f'<div class="svc-watermark" aria-hidden="true">{icon}</div>'
+                  f'<h3>{label}</h3><p>{blurb}</p></a>')
+    return f'<div class="{grid_cls}">{cards}</div>'
+
+
+def related_services(current):
+    """Bottom-of-page strip linking every other service page."""
+    links = "".join(
+        f'<a href="{href}">{label}</a>'
+        for href, label, _b, _n, _i in SERVICE_PAGES if href != current
+    )
+    return f"""<section class="bg-white sec-tight">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Other services.</h2></div>
+    <div class="related-row reveal">{links}</div>
+  </div>
+</section>"""
+
+
+def crumbs(trail):
+    """trail: list of (href|None, label). Last item is the current page."""
+    items = ""
+    for href, label in trail:
+        items += f'<li><a href="{href}">{label}</a></li>' if href else f"<li>{label}</li>"
+    return f'<ul class="crumbs">{items}</ul>'
+
+
+def breadcrumb_schema(trail):
+    out = []
+    for i, (href, label) in enumerate(trail, 1):
+        entry = {"@type": "ListItem", "position": i, "name": label}
+        if href:
+            url = f"{SITE}/" if href == "index.html" else f"{SITE}/{href[:-5]}"
+            entry["item"] = url
+        out.append(entry)
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": out}
+
+
+def service_schema(name, description, filename, service_type=None):
+    return {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": name,
+        "description": description,
+        "serviceType": service_type or name,
+        "url": f"{SITE}/{filename[:-5]}",
+        "provider": {"@id": f"{SITE}/#business"},
+        "areaServed": {"@type": "Country", "name": "Ireland"},
+        "audience": {"@type": "Audience", "audienceType": "Domestic and commercial"},
+    }
 ICON_MAIL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'
 ICON_INSTA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>'
 ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>'
@@ -84,18 +177,18 @@ FOOTER = f"""<footer>
       <div>
         <h4>Services</h4>
         <ul>
-          <li><a href="services.html#installation">Installation</a></li>
-          <li><a href="services.html#commissioning">Commissioning</a></li>
-          <li><a href="services.html#repairs">Service &amp; repairs</a></li>
-          <li><a href="services.html#aftersales">Aftersales maintenance</a></li>
-          <li><a href="services.html#balancing">Hydraulic balancing</a></li>
-          <li><a href="services.html#air-conditioning">Air conditioning</a></li>
+          <li><a href="installation.html">Installation</a></li>
+          <li><a href="commissioning.html">Commissioning</a></li>
+          <li><a href="repairs.html">Service &amp; repairs</a></li>
+          <li><a href="maintenance.html">Aftersales maintenance</a></li>
+          <li><a href="hydraulic-balancing.html">Hydraulic balancing</a></li>
+          <li><a href="air-conditioning.html">Air conditioning</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="maintenance.html">Annual maintenance plan</a></li>
+          <li><a href="services.html">All services</a></li>
           <li><a href="certifications.html">Certifications</a></li>
           <li><a href="index.html#coverage">Coverage</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -223,6 +316,23 @@ def page(filename, title, description, body, extra_schema=None, og_type="website
     html = html.replace("__MAINJS_V__", html_footer_v)
     (OUT / filename).write_text(html, encoding="utf-8")
     print("wrote", filename)
+
+
+def sitemap(entries):
+    """entries: list of (filename, priority). Written to match cleanUrls output."""
+    import datetime
+    today = datetime.date.today().isoformat()
+    rows = ""
+    for filename, priority in entries:
+        loc = f"{SITE}/" if filename == "index.html" else f"{SITE}/{filename[:-5]}"
+        rows += (f"  <url>\n    <loc>{loc}</loc>\n"
+                 f"    <lastmod>{today}</lastmod>\n"
+                 f"    <priority>{priority}</priority>\n  </url>\n")
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           f"{rows}</urlset>\n")
+    (OUT / "sitemap.xml").write_text(xml, encoding="utf-8")
+    print("wrote sitemap.xml")
 
 
 def faq_block(items, start=1):

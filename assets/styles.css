@@ -542,6 +542,22 @@ section { padding: 92px 0; }
 @media (max-width: 600px) { .issues-list { grid-template-columns: 1fr; } }
 
 /* ---------- Brands ---------- */
+/* Cross-links between service pages */
+.related-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.related-row a {
+  font-family: 'Sora', sans-serif;
+  font-weight: 500;
+  font-size: 0.92rem;
+  text-decoration: none;
+  color: var(--pine);
+  background: var(--bone);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 20px;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.related-row a:hover { background: var(--pine); border-color: var(--pine); color: var(--white); }
+
 .brands-row {
   display: flex;
   flex-wrap: wrap;

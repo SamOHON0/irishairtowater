@@ -16,7 +16,15 @@ from build import (
     page, faq_block, faq_schema, CTA_BAND, SITE, img,
     PHONE_DISPLAY, PHONE_TEL, PHONE_WA, EMAIL,
     ICON_PHONE, ICON_MAIL, ICON_INSTA, ICON_PIN, TICK, PLUS,
+    SERVICE_PAGES, svc_cards, related_services, crumbs,
+    breadcrumb_schema, service_schema, sitemap,
 )
+
+SERVICES_TRAIL = [("index.html", "Home"), ("services.html", "Services")]
+
+
+def svc_trail(label):
+    return SERVICES_TRAIL + [(None, label)]
 
 # His site and his Safety Statement both list these five. Grant is a training
 # certificate, not a brand he advertises, so it stays on the certifications page.
@@ -150,28 +158,7 @@ HOME = f"""
 
 <section id="services" class="sec-tight">
   <div class="wrap">
-    <div class="svc-grid svc-grid-3">
-      <a class="svc reveal" href="services.html#commissioning">
-        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-        <h3>Commissioning</h3>
-        <p>Correct setup from day one: checks, settings, optimisation, and clear handover.</p>
-      </a>
-      <a class="svc reveal" href="services.html#repairs">
-        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
-        <h3>Service &amp; Repairs</h3>
-        <p>Fault finding, alarms, cycling issues, DHW temperature problems and performance optimisation.</p>
-      </a>
-      <a class="svc reveal" href="services.html#aftersales">
-        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
-        <h3>Aftersales Maintenance</h3>
-        <p>Planned servicing and callouts to keep systems running efficiently year-round.</p>
-      </a>
-      <a class="svc reveal" href="services.html#air-conditioning">
-        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg></div>
-        <h3>Air Conditioning</h3>
-        <p>Domestic high wall units and commercial systems, including cassette, underceiling and multi-unit VRV/VRF.</p>
-      </a>
-    </div>
+    {svc_cards()}
   </div>
 </section>
 
@@ -182,10 +169,12 @@ HOME = f"""
       <p>Air-to-water heat pumps. Domestic and commercial.</p>
     </div>
     <ul class="tick-list issues-list reveal">
+      <li>{TICK}Installation of domestic and commercial systems</li>
       <li>{TICK}Commissioning &amp; setup (controls, temperatures, checks)</li>
       <li>{TICK}Performance optimisation &amp; troubleshooting</li>
       <li>{TICK}Routine / planned maintenance</li>
       <li>{TICK}Repairs &amp; fault finding (alarms, cycling, low performance)</li>
+      <li>{TICK}Hydraulic balancing</li>
       <li>{TICK}Clear reporting &amp; recommendations</li>
       <li>{TICK}Air conditioning: domestic and commercial installation &amp; service</li>
     </ul>
@@ -212,7 +201,7 @@ HOME = f"""
       <div class="g-item g-tall"><img src="images/coverage-home-install.jpg" alt="Finished Panasonic air-to-water heat pump installation" width="750" height="1000" loading="lazy" decoding="async"></div>
       <div class="g-item"><img src="images/services-commissioning-controls.jpg" alt="Heat pump control board during commissioning" width="750" height="1000" loading="lazy" decoding="async"></div>
       <div class="g-item"><img src="images/services-aftersales-filters.jpg" alt="Air filters removed for cleaning on a service visit" width="750" height="1000" loading="lazy" decoding="async"></div>
-      <div class="g-item g-tall"><img src="images/certifications-at-work.jpg" alt="Servicing pipework on a commercial heat pump installation" width="750" height="1000" loading="lazy" decoding="async"></div>
+      <div class="g-item g-tall"><img src="images/certifications-at-work.jpg" alt="A large system strainer removed for cleaning on a commercial installation" width="750" height="1000" loading="lazy" decoding="async"></div>
       <div class="g-item"><img src="images/services-installation.jpg" alt="Wall-mounted heat pump unit with pipework" width="562" height="1000" loading="lazy" decoding="async"></div>
       <div class="g-item"><img src="images/maintenance-clear-access.jpg" alt="Outdoor heat pump unit sited with clear space around it" width="750" height="1000" loading="lazy" decoding="async"></div>
     </div>
@@ -285,24 +274,83 @@ HOME = f"""
 """
 
 
-# ============================================================ SERVICES
+# ============================================================ SERVICES HUB
+# One page per service. This page is the index; each card is its own page.
+BRANDS_BAND = f"""<section class="bg-white sec-tight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Brands we work with.</h2>
+    </div>
+    <div class="brands-row reveal">{BRANDS_ROW}</div>
+  </div>
+</section>"""
+
+SAFE_NOTE = ('<p style="font-size:0.9rem">Work on refrigerant circuits is carried out only by '
+             'F-Gas certified personnel, using certified recovery equipment. Refrigerant is never '
+             'vented to atmosphere.</p>')
+
+ENQUIRY_TIP = f"""<section class="bg-pine sec-tight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Before you call.</h2>
+      <p>Three things that let us tell you more on the phone.</p>
+    </div>
+    <ul class="tick-list issues-list reveal">
+      <li>{TICK}Your county</li>
+      <li>{TICK}The system brand and model</li>
+      <li>{TICK}Any alarm code, or a photo of the display</li>
+    </ul>
+  </div>
+</section>"""
+
 SERVICES = f"""
 <section class="page-hero">
   <div class="wrap">
-    <h1>Air-to-water heat pump services.</h1>
-    <p>Installation, commissioning, service and repairs, and aftersales maintenance. Domestic and commercial systems, Sligo-based, covering all of Ireland.</p>
-    <ul class="crumbs"><li><a href="index.html">Home</a></li><li>Services</li></ul>
+    <h1>Heat pump and air conditioning services.</h1>
+    <p>Installation, commissioning, service and repairs, aftersales maintenance, hydraulic balancing and air conditioning. Domestic and commercial systems, Sligo-based, covering all of Ireland.</p>
+    {crumbs([("index.html", "Home"), (None, "Services")])}
   </div>
 </section>
 
 <section>
   <div class="wrap">
+    {svc_cards()}
+  </div>
+</section>
 
-    <div class="svc-detail reveal" id="installation">
-      <div class="svc-detail-media">{img("services-installation.jpg", "Wall-mounted heat pump unit with pipework run down the wall", 562, 1000)}</div>
+<section class="bg-pine">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Common callouts.</h2>
+      <p>If you're seeing any of these, they're usually fixable with the right checks.</p>
+    </div>
+    <ul class="tick-list issues-list reveal">{PROB_BLOCKS}</ul>
+    <div style="margin-top:30px"><a class="btn btn-amber" href="repairs.html">Service &amp; repairs</a></div>
+  </div>
+</section>
+
+{BRANDS_BAND}
+
+{CTA_BAND}
+"""
+
+
+# ============================================================ INSTALLATION
+INSTALLATION = f"""
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Air-to-water heat pump installation.</h1>
+    <p>Installation of domestic and commercial air-to-water heat pump systems, through to commissioning and handover.</p>
+    {crumbs(svc_trail("Installation"))}
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="svc-detail reveal">
+      <div class="svc-detail-media">{img("services-installation.jpg", "Wall-mounted heat pump unit with pipework run down the wall", 562, 1000, eager=True)}</div>
       <div>
-        <h2>Installation</h2>
-        <p>Installation of domestic and commercial air-to-water heat pump systems, through to commissioning and handover.</p>
+        <h2>What the work covers.</h2>
         <ul class="tick-list">
           <li>{TICK}Siting and mounting of outdoor and indoor units</li>
           <li>{TICK}Refrigerant pipework: brazing, pressure testing, evacuation and charging</li>
@@ -313,26 +361,123 @@ SERVICES = f"""
         <p style="font-size:0.9rem">Electrical installation work is carried out in accordance with the National Rules for Electrical Installations (I.S. 10101). Where the scope requires a Registered Electrical Contractor, this is arranged and coordinated accordingly.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="svc-detail flip reveal" id="commissioning">
-      <div class="svc-detail-media">{img("services-commissioning-controls.jpg", "Heat pump control board and wiring inside an opened control panel", 750, 1000)}</div>
+<section class="bg-pine">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <h2>How we work on site.</h2>
+        <p style="color:rgba(244,243,238,0.78);margin-bottom:20px">From the company Safety Statement.</p>
+        <ul class="tick-list">
+          <li>{TICK}Only F-Gas certified personnel work on refrigerant circuits, and certification is checked before work commences</li>
+          <li>{TICK}Refrigerant is recovered using certified recovery equipment and never vented to atmosphere</li>
+          <li>{TICK}Safe isolation procedure is followed before any electrical work: isolate, lock off, prove dead</li>
+          <li>{TICK}Site briefing or induction is completed on arrival at multi-trade sites</li>
+          <li>{TICK}Manual handling training for lifting units, cylinders, gas bottles and equipment</li>
+        </ul>
+        <p style="color:rgba(244,243,238,0.62);font-size:0.88rem;margin-top:22px">The Safety Statement is a general company document. It is not a job-specific or site-specific risk assessment and does not replace RAMS, method statements, permits-to-work or site inductions, which are prepared separately where required.</p>
+      </div>
+      <div class="about-media reveal">
+        {img("about-installed-unit.jpg", "Completed air-to-water heat pump installation at a domestic property", 750, 1000)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>After the install.</h2>
+      <p>Every system we install is commissioned and handed over, and can be taken onto annual maintenance from there.</p>
+    </div>
+    <div class="split-cols">
+      <div class="panel reveal">
+        <h3>Commissioning</h3>
+        <p class="panel-sub">Checks against manufacturer specification, settings and controls configured, performance optimised, and a clear handover.</p>
+        <a class="btn btn-ghost btn-sm" href="commissioning.html">Commissioning</a>
+      </div>
+      <div class="panel reveal">
+        <h3>Annual maintenance</h3>
+        <p class="panel-sub">A yearly visit by an F-Gas certified engineer, with an F-Gas leak check and a written service record.</p>
+        <a class="btn btn-ghost btn-sm" href="maintenance.html">Maintenance plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{BRANDS_BAND}
+
+{related_services("installation.html")}
+
+{CTA_BAND}
+"""
+
+
+# ============================================================ COMMISSIONING
+COMMISSIONING = f"""
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Heat pump commissioning.</h1>
+    <p>Correct setup from day one: checks, settings, optimisation, and clear handover. Domestic and commercial air-to-water systems, all of Ireland.</p>
+    {crumbs(svc_trail("Commissioning"))}
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="svc-detail reveal">
+      <div class="svc-detail-media">{img("services-commissioning-controls.jpg", "Heat pump control board and wiring inside an opened control panel", 750, 1000, eager=True)}</div>
       <div>
-        <h2>Commissioning</h2>
-        <p>Correct setup from day one: checks, settings, optimisation, and clear handover.</p>
+        <h2>What commissioning covers.</h2>
         <ul class="tick-list">
           <li>{TICK}System checks against manufacturer specification</li>
           <li>{TICK}Settings and controls configured</li>
           <li>{TICK}Optimisation of system performance</li>
           <li>{TICK}Clear handover so you understand your controls</li>
         </ul>
+        {SAFE_NOTE}
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="svc-detail reveal" id="repairs">
-      <div class="svc-detail-media">{img("services-repairs-strainer-check.jpg", "A system strainer checked in hand during a service call", 937, 1000)}</div>
+<section class="bg-white">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Already installed and not performing as expected?</h2>
+      <p>That is service and repairs rather than commissioning. Either way, get in touch and we will tell you which one you need.</p>
+    </div>
+    <ul class="tick-list issues-list reveal">{PROB_BLOCKS}</ul>
+    <div style="margin-top:30px"><a class="btn btn-ghost" href="repairs.html">Service &amp; repairs</a></div>
+  </div>
+</section>
+
+{BRANDS_BAND}
+
+{related_services("commissioning.html")}
+
+{CTA_BAND}
+"""
+
+
+# ============================================================ SERVICE & REPAIRS
+REPAIRS = f"""
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Heat pump service and repairs.</h1>
+    <p>Fault finding, alarms, cycling issues, DHW temperature problems and performance optimisation. Sligo-based, covering all of Ireland.</p>
+    {crumbs(svc_trail("Service &amp; repairs"))}
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="svc-detail reveal">
+      <div class="svc-detail-media">{img("services-repairs-strainer-check.jpg", "A system strainer checked in hand during a service call", 937, 1000, eager=True)}</div>
       <div>
-        <h2>Service &amp; repairs</h2>
-        <p>Fault finding, alarms, cycling issues, DHW temperature problems and performance optimisation.</p>
+        <h2>What we look at.</h2>
         <ul class="tick-list">
           <li>{TICK}Fault finding and diagnostics</li>
           <li>{TICK}Alarms and lockouts</li>
@@ -340,64 +485,133 @@ SERVICES = f"""
           <li>{TICK}DHW temperature problems</li>
           <li>{TICK}Performance optimisation</li>
         </ul>
-        <p style="font-size:0.9rem">Work on refrigerant circuits is carried out only by F-Gas certified personnel, using certified recovery equipment. Refrigerant is never vented to atmosphere.</p>
+        {SAFE_NOTE}
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="svc-detail flip reveal" id="aftersales">
-      <div class="svc-detail-media">{img("services-aftersales-filters.jpg", "Air filters removed and laid out for cleaning during a service visit", 750, 1000)}</div>
-      <div>
-        <h2>Aftersales maintenance</h2>
-        <p>Planned servicing and callouts to keep systems running efficiently year-round.</p>
-        <ul class="tick-list">
-          <li>{TICK}Annual maintenance visit, carried out by an F-Gas certified engineer</li>
-          <li>{TICK}F-Gas leak check, recorded as required under F-Gas Regulations</li>
-          <li>{TICK}Written service record of what was checked and any issues found</li>
-          <li>{TICK}Callouts between scheduled visits</li>
-        </ul>
-        <a class="btn btn-amber btn-sm" href="maintenance.html">See what a visit includes</a>
-      </div>
+<section class="bg-pine">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Common callouts.</h2>
+      <p>If you're seeing any of these, they're usually fixable with the right checks.</p>
     </div>
+    <ul class="tick-list issues-list reveal">{PROB_BLOCKS}</ul>
+  </div>
+</section>
 
-    <div class="svc-detail reveal" id="balancing">
-      <div class="svc-detail-media">{img("services-balancing-manifold.jpg", "Heating manifold with flow meters, from our hydraulic balancing explainer", 1000, 514, cls="frame-landscape")}</div>
+<section class="bg-white">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Cold rooms are not always the heat pump.</h2>
+      <p>Where flow is unevenly distributed, one room runs warm while another sits cool. That is a balancing job, not a repair.</p>
+    </div>
+    <div style="margin-top:6px"><a class="btn btn-ghost" href="hydraulic-balancing.html">Hydraulic balancing</a></div>
+  </div>
+</section>
+
+{ENQUIRY_TIP}
+
+{related_services("repairs.html")}
+
+{CTA_BAND}
+"""
+
+
+# ============================================================ HYDRAULIC BALANCING
+BALANCING = f"""
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Hydraulic balancing.</h1>
+    <p>Sometimes the heat source is not the problem. Short loops get too much flow and long loops get too little, so one room runs warm while another sits cool.</p>
+    {crumbs(svc_trail("Hydraulic balancing"))}
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="svc-detail reveal">
+      <div class="svc-detail-media">{img("services-balancing-manifold.jpg", "Heating manifold with flow meters, from our hydraulic balancing explainer", 1000, 514, eager=True, cls="frame-landscape")}</div>
       <div>
-        <h2>Hydraulic balancing</h2>
-        <p>Sometimes the heat source is not the problem. Short loops get too much flow and long loops get too little, so one room runs warm while another sits cool.</p>
+        <h2>What balancing does.</h2>
         <ul class="tick-list">
           <li>{TICK}Uneven flow distribution identified</li>
           <li>{TICK}Flow meter adjusted by circuit</li>
           <li>{TICK}More even room temperatures</li>
         </ul>
+        <p style="font-size:0.9rem">Balancing is carried out at the manifold, circuit by circuit, using the flow meters on the system.</p>
       </div>
     </div>
-
-    <div class="svc-detail-full reveal" id="air-conditioning">
-      <h2>Air conditioning</h2>
-      <p>Installation and service of domestic and commercial air conditioning, alongside our heat pump work. Same F-GAS certified refrigerant handling, and a QQI Level 6 Advanced Certificate in Refrigeration and Air Conditioning behind it.</p>
-      <div class="split-cols" style="margin-top:34px">
-        <div class="panel">
-          <h3>Domestic</h3>
-          <ul class="tick-list">{AC_DOM_LI}</ul>
-        </div>
-        <div class="panel">
-          <h3>Commercial</h3>
-          <ul class="tick-list">{AC_COM_LI}</ul>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<section class="bg-white sec-tight">
+<section class="bg-white">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>Brands we work with.</h2>
+      <h2>When it's worth looking at.</h2>
+      <p>Two of the five issues we get called out for most often can come back to flow rather than the heat pump itself.</p>
     </div>
-    <div class="brands-row reveal">{BRANDS_ROW}</div>
+    <ul class="tick-list issues-list reveal">
+      <li>{TICK}Cold rooms / poor heat output</li>
+      <li>{TICK}High electricity bills / low efficiency</li>
+    </ul>
+    <div style="margin-top:30px"><a class="btn btn-ghost" href="repairs.html">Service &amp; repairs</a></div>
   </div>
 </section>
+
+{related_services("hydraulic-balancing.html")}
+
+{CTA_BAND}
+"""
+
+
+# ============================================================ AIR CONDITIONING
+AIR_CON = f"""
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Air conditioning installation and service.</h1>
+    <p>Domestic and commercial air conditioning, alongside our heat pump work. F-GAS certified refrigerant handling, and a QQI Level 6 Advanced Certificate in Refrigeration and Air Conditioning behind it.</p>
+    {crumbs(svc_trail("Air conditioning"))}
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="split-cols">
+      <div class="panel reveal">
+        <h3>Domestic</h3>
+        <p class="panel-sub">High wall units for homes.</p>
+        <ul class="tick-list">{AC_DOM_LI}</ul>
+      </div>
+      <div class="panel reveal">
+        <h3>Commercial</h3>
+        <p class="panel-sub">Offices, retail and light industrial.</p>
+        <ul class="tick-list">{AC_COM_LI}</ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-pine">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>The same certification as the heat pump work.</h2>
+      <p>Air conditioning and air-to-water heat pumps are both refrigerant systems, and the same qualifications and rules apply to both.</p>
+    </div>
+    <ul class="tick-list issues-list reveal">
+      <li>{TICK}F-GAS registered. Only F-Gas certified personnel work on refrigerant circuits</li>
+      <li>{TICK}QQI Level 6 Advanced Certificate, Craft - Refrigeration and Air Conditioning, awarded with Credit</li>
+      <li>{TICK}Refrigerant recovered using certified recovery equipment, never vented to atmosphere</li>
+      <li>{TICK}Covered under Combined Liability insurance: Public/Products and Employers' Liability</li>
+    </ul>
+    <div style="margin-top:30px"><a class="btn btn-amber" href="certifications.html">See the certificates</a></div>
+  </div>
+</section>
+
+{ENQUIRY_TIP}
+
+{related_services("air-conditioning.html")}
 
 {CTA_BAND}
 """
@@ -456,7 +670,7 @@ MAINTENANCE = f"""
   <div class="wrap">
     <h1>Your annual maintenance visit.</h1>
     <p>What's included, and what's chargeable. We share this with all customers ahead of their visit so there are no surprises.</p>
-    <ul class="crumbs"><li><a href="index.html">Home</a></li><li>Maintenance Plan</li></ul>
+    {crumbs(svc_trail("Aftersales maintenance"))}
   </div>
 </section>
 
@@ -540,6 +754,8 @@ MAINTENANCE = f"""
   </div>
 </section>
 
+{related_services("maintenance.html")}
+
 <section class="contact">
   <div class="wrap contact-grid">
     <div class="reveal">
@@ -622,7 +838,7 @@ CERTIFICATIONS = f"""
   <div class="wrap">
     <div class="about-grid">
       <div class="about-media reveal">
-        {img("certifications-at-work.jpg", "Servicing pipework on a commercial heat pump installation", 750, 1000)}
+        {img("certifications-at-work.jpg", "A large system strainer removed for cleaning on a commercial installation", 750, 1000)}
       </div>
       <div class="reveal">
         <h2>How we work on site.</h2>
@@ -691,24 +907,19 @@ NOT_FOUND = f"""
 
 <section>
   <div class="wrap">
-    <div class="sec-head reveal"><h2>Useful links.</h2></div>
-    <div class="svc-grid">
-      <a class="svc reveal" href="services.html">
-        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-        <h3>Services</h3><p>Installation, commissioning, service and repairs, aftersales maintenance.</p>
-      </a>
-      <a class="svc reveal" href="maintenance.html">
-        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
-        <h3>Annual maintenance</h3><p>What your yearly visit includes and what's chargeable.</p>
-      </a>
-      <a class="svc reveal" href="certifications.html">
-        <div class="svc-watermark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h3>Certifications</h3><p>F-GAS, QQI Level 6, R290 training, Safety Statement and insurance.</p>
-      </a>
-      <a class="svc reveal" href="contact.html">
-        <div class="svc-watermark" aria-hidden="true">{ICON_PHONE}</div>
-        <h3>Contact</h3><p>Phone, WhatsApp, email and a callback form.</p>
-      </a>
+    <div class="sec-head reveal"><h2>Our services.</h2></div>
+    {svc_cards()}
+  </div>
+</section>
+
+<section class="bg-white sec-tight">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Elsewhere on the site.</h2></div>
+    <div class="related-row reveal">
+      <a href="services.html">All services</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="index.html#coverage">Coverage</a>
+      <a href="contact.html">Contact</a>
     </div>
   </div>
 </section>
@@ -724,13 +935,76 @@ if __name__ == "__main__":
 
     page("services.html",
          "Heat Pump & Air Conditioning Services, Sligo | Irish Air to Water",
-         "Air-to-water heat pump commissioning, service and repairs, aftersales maintenance, and air conditioning installation. Domestic and commercial, all of Ireland.",
-         SERVICES)
+         "Heat pump installation, commissioning, service and repairs, maintenance, hydraulic balancing and air conditioning. Domestic and commercial, all of Ireland.",
+         SERVICES,
+         extra_schema=[breadcrumb_schema([("index.html", "Home"), (None, "Services")])])
+
+    page("installation.html",
+         "Heat Pump Installation, Sligo & Nationwide | Irish Air to Water",
+         "Installation of domestic and commercial air-to-water heat pump systems, from siting and refrigerant pipework through to commissioning and handover.",
+         INSTALLATION,
+         extra_schema=[
+             service_schema("Air-to-water heat pump installation",
+                            "Installation of domestic and commercial air-to-water heat pump systems, through to commissioning and handover.",
+                            "installation.html"),
+             breadcrumb_schema(svc_trail("Installation")),
+         ])
+
+    page("commissioning.html",
+         "Heat Pump Commissioning, Ireland | Irish Air to Water",
+         "Air-to-water heat pump commissioning: checks against manufacturer specification, settings and controls configured, performance optimised, clear handover.",
+         COMMISSIONING,
+         extra_schema=[
+             service_schema("Air-to-water heat pump commissioning",
+                            "Correct setup from day one: checks against manufacturer specification, settings and controls configured, optimisation, and clear handover.",
+                            "commissioning.html"),
+             breadcrumb_schema(svc_trail("Commissioning")),
+         ])
+
+    page("repairs.html",
+         "Heat Pump Service & Repairs, Sligo | Irish Air to Water",
+         "Air-to-water heat pump fault finding and repairs: alarms and lockouts, cycling issues, DHW temperature problems and performance optimisation.",
+         REPAIRS,
+         extra_schema=[
+             service_schema("Air-to-water heat pump service and repairs",
+                            "Fault finding, alarms and lockouts, cycling issues, DHW temperature problems and performance optimisation.",
+                            "repairs.html"),
+             breadcrumb_schema(svc_trail("Service &amp; repairs")),
+         ])
 
     page("maintenance.html",
          "Annual Heat Pump Maintenance Visit | Irish Air to Water",
          "What's included in your annual air-to-water heat pump maintenance visit and what's chargeable. F-Gas certified engineer, written service record.",
-         MAINTENANCE, extra_schema=[faq_schema(MAINT_FAQS)])
+         MAINTENANCE,
+         extra_schema=[
+             service_schema("Heat pump aftersales maintenance",
+                            "Annual maintenance visit by an F-Gas certified engineer, including a recorded F-Gas leak check and a written service record, plus callouts between visits.",
+                            "maintenance.html"),
+             breadcrumb_schema(svc_trail("Aftersales maintenance")),
+             faq_schema(MAINT_FAQS),
+         ])
+
+    page("hydraulic-balancing.html",
+         "Hydraulic Balancing for Heat Pumps | Irish Air to Water",
+         "Short loops get too much flow and long loops too little, so one room runs warm and another cool. Balancing evens the flow out circuit by circuit at the manifold.",
+         BALANCING,
+         extra_schema=[
+             service_schema("Hydraulic balancing",
+                            "Identifying uneven flow distribution and adjusting flow meters circuit by circuit for more even room temperatures.",
+                            "hydraulic-balancing.html"),
+             breadcrumb_schema(svc_trail("Hydraulic balancing")),
+         ])
+
+    page("air-conditioning.html",
+         "Air Conditioning Installation & Service | Irish Air to Water",
+         "Domestic high wall air conditioning and commercial systems including cassette, underceiling and multi-unit VRV/VRF. F-GAS certified, Sligo-based, all of Ireland.",
+         AIR_CON,
+         extra_schema=[
+             service_schema("Air conditioning installation and service",
+                            "Installation and service of domestic high wall air conditioning units, and commercial systems including cassette, underceiling and multi-unit VRV/VRF.",
+                            "air-conditioning.html"),
+             breadcrumb_schema(svc_trail("Air conditioning")),
+         ])
 
     page("certifications.html",
          "Certifications & Insurance | Irish Air to Water",
@@ -746,3 +1020,16 @@ if __name__ == "__main__":
          "Contact | Irish Air to Water Heat Pump Specialists, Sligo",
          "Call 087 341 3114, WhatsApp or email. Air-to-water heat pump installation, commissioning, service and repairs. Sligo-based, covering all of Ireland.",
          CONTACT)
+
+    sitemap([
+        ("index.html", "1.0"),
+        ("services.html", "0.9"),
+        ("installation.html", "0.8"),
+        ("commissioning.html", "0.8"),
+        ("repairs.html", "0.8"),
+        ("maintenance.html", "0.8"),
+        ("hydraulic-balancing.html", "0.7"),
+        ("air-conditioning.html", "0.8"),
+        ("certifications.html", "0.7"),
+        ("contact.html", "0.8"),
+    ])
